@@ -31,6 +31,7 @@ namespace BookmakerIntegration.Domain.AggregateModels.Bookmaker
         /// <summary>
         /// Initializes a new instance of the <see cref="Bookmaker"/> class.
         /// </summary>
+        /// <param name="bookmakerId">The bookmaker identifier.</param>
         /// <param name="baseUrl">The base URL.</param>
         internal Bookmaker(Guid bookmakerId, string baseUrl)
             : this()
@@ -75,7 +76,7 @@ namespace BookmakerIntegration.Domain.AggregateModels.Bookmaker
         {
             if (sport is null)
             {
-                throw new ArgumentNullException(nameof(sport), "Sport is null.");
+                throw new ArgumentNullException(nameof(sport), "The Sport cannot be null.");
             }
 
             if (this.sports.Any(x => x.Type == sport.Type))

@@ -36,6 +36,7 @@ namespace BookmakerIntegration.Domain.AggregateModels.Bookmaker.Builder.Bookmake
             {
                 this.bookmaker.AddSport(sport);
             }
+
             return this;
         }
 
@@ -57,6 +58,7 @@ namespace BookmakerIntegration.Domain.AggregateModels.Bookmaker.Builder.Bookmake
         public IBookmakerBuilder NewBookmaker(Guid bookmakerId, string baseUrl)
         {
             this.bookmaker = new Bookmaker(bookmakerId, baseUrl);
+
             return this;
         }
     }

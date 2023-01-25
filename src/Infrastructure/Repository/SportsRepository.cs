@@ -12,8 +12,11 @@ namespace BookmakerIntegration.Infrastructure.Repository
     using BookmakerIntegration.Domain.AggregateModels.Bookmaker.Repository;
     using BookmakerIntegration.Domain.AggregateModels.Sports;
 
-    /// <summary> <see cref="SportsRepository"/> class </summary> <seealso
-    /// cref="GenericRepository{Sports&};" /> <seealso cref="ISportsRepository" />
+    /// <summary>
+    /// <see cref="SportsRepository"/>
+    /// </summary>
+    /// <seealso cref="GenericRepository{Sports}"/>
+    /// <seealso cref="ISportsRepository"/>
     internal class SportsRepository : GenericRepository<Sports>, ISportsRepository
     {
         /// <summary>

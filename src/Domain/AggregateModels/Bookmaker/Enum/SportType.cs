@@ -9,6 +9,9 @@
 
 namespace BookmakerIntegration.Domain.AggregateModels.Bookmaker.Enum
 {
+    /// <summary>
+    /// <see cref="SportType"/> enum
+    /// </summary>
     public enum SportType
     {
         /// <summary>

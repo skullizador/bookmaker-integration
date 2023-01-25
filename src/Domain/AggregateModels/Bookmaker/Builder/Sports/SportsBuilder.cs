@@ -41,6 +41,7 @@ namespace BookmakerIntegration.Domain.AggregateModels.Bookmaker.Builder.Sports
         public ISportsBuilder NewSport(SportType sportType, string url)
         {
             this.sport = new Sports(sportType, url);
+
             return this;
         }
     }
