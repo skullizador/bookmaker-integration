@@ -34,9 +34,6 @@ namespace BookmakerIntegration.Infrastructure.EntityConfiguration
 
             builder.Property(b => b.BookmakerId)
                 .IsRequired();
-
-            builder.Property(b => b.BaseUrl)
-                .IsRequired();
         }
     }
 }

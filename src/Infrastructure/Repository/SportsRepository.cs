@@ -9,8 +9,8 @@
 
 namespace BookmakerIntegration.Infrastructure.Repository
 {
+    using BookmakerIntegration.Domain.AggregateModels.Bookmaker;
     using BookmakerIntegration.Domain.AggregateModels.Bookmaker.Repository;
-    using BookmakerIntegration.Domain.AggregateModels.Sports;
 
     /// <summary>
     /// <see cref="SportsRepository"/>

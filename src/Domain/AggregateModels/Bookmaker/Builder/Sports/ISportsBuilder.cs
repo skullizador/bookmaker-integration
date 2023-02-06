@@ -9,14 +9,22 @@
 
 namespace BookmakerIntegration.Domain.AggregateModels.Bookmaker.Builder.Sports
 {
+    using System.Collections.Generic;
     using BookmakerIntegration.Domain.AggregateModels.Bookmaker.Enum;
-    using Domain.AggregateModels.Sports;
+    using Domain.AggregateModels.Bookmaker;
 
     /// <summary>
     /// <see cref="ISportsBuilder"/> interface
     /// </summary>
     public interface ISportsBuilder
     {
+        /// <summary>
+        /// Adds the competitions.
+        /// </summary>
+        /// <param name="competitions">The competitions.</param>
+        /// <returns></returns>
+        ISportsBuilder AddCompetitions(List<Competition> competitions);
+
         /// <summary>
         /// Builds this instance.
         /// </summary>
@@ -27,8 +35,7 @@ namespace BookmakerIntegration.Domain.AggregateModels.Bookmaker.Builder.Sports
         /// Creates new sports.
         /// </summary>
         /// <param name="sportType">Type of the sport.</param>
-        /// <param name="url">The URL.</param>
         /// <returns></returns>
-        ISportsBuilder NewSport(SportType sportType, string url);
+        ISportsBuilder NewSport(SportType sportType);
     }
 }

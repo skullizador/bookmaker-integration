@@ -9,7 +9,7 @@
 
 namespace BookmakerIntegration.Domain.AggregateModels.Bookmaker.Repository
 {
-    using BookmakerIntegration.Domain.AggregateModels.Sports;
+    using BookmakerIntegration.Domain.AggregateModels.Bookmaker;
     using BookmakerIntegration.Domain.SeedWork;
 
     /// <summary>
