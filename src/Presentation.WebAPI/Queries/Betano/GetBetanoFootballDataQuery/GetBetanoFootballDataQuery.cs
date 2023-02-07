@@ -9,13 +9,19 @@
 
 namespace BookmakerIntegration.Presentation.WebAPI.Queries.Betano.GetBetanoFootballDataQuery
 {
+    using BookmakerIntegration.Presentation.WebAPI.DataModels.Betano;
     using MediatR;
 
     /// <summary>
     /// <see cref="GetBetanoFootballDataQuery"/>
     /// </summary>
-    /// <seealso cref="INotification"/>
-    public class GetBetanoFootballDataQuery : INotification
+    /// <seealso cref="IRequest{BetanoJsonDataModel}"/>
+    public class GetBetanoFootballDataQuery : IRequest<BetanoJsonDataModel>
     {
+        /// <summary>
+        /// Gets the competition identifier.
+        /// </summary>
+        /// <value>The competition identifier.</value>
+        public Guid CompetitionId { get; init; }
     }
 }
