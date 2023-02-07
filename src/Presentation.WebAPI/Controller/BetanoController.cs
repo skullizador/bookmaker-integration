@@ -10,6 +10,8 @@
 namespace BookmakerIntegration.Presentation.WebAPI.Controller
 {
     using System.Net;
+    using BookmakerIntegration.Presentation.WebAPI.DataModels.Betano;
+    using BookmakerIntegration.Presentation.WebAPI.Dtos.Input.Bookmaker;
     using BookmakerIntegration.Presentation.WebAPI.Queries.Betano.GetBetanoFootballDataQuery;
     using BookmakerIntegration.Presentation.WebAPI.Utils;
     using MediatR;
@@ -38,19 +40,26 @@ namespace BookmakerIntegration.Presentation.WebAPI.Controller
         }
 
         /// <summary>
-        /// Gets the football data asynchronous.
+        /// Gets the football competition data asynchronous.
         /// </summary>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns></returns>
         [HttpGet]
-        [Route("Football")]
-        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [Route("Football/{CompetitionId}")]
+        [ProducesResponseType(typeof(BetanoJsonDataModel), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(ErrorMessage), (int)HttpStatusCode.BadRequest)]
-        public async Task<IActionResult> GetFootballDataAsync(CancellationToken cancellationToken)
+        public async Task<IActionResult> GetFootballCompetitionDataAsync(
+            [FromRoute] GetBookmakerDataByCompetitionIdDto filter,
+            CancellationToken cancellationToken)
         {
-            await this.mediator.Publish(new GetBetanoFootballDataQuery(), cancellationToken);
+            BetanoJsonDataModel data = await this.mediator.Send(new GetBetanoFootballDataQuery
+            {
+                CompetitionId = filter.CompetitionId
+            }, cancellationToken);
 
-            return this.Ok();
+            //TODO: CHANGE THE RETURN TO A DTO;
+
+            return this.Ok(data);
         }
     }
 }
