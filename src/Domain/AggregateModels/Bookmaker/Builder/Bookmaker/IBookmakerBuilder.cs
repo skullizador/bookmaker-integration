@@ -12,7 +12,6 @@ namespace BookmakerIntegration.Domain.AggregateModels.Bookmaker.Builder.Bookmake
     using System;
     using System.Collections.Generic;
     using Domain.AggregateModels.Bookmaker;
-    using Domain.AggregateModels.Sports;
 
     /// <summary>
     /// <see cref="IBookmakerBuilder"/> interface
@@ -35,9 +34,8 @@ namespace BookmakerIntegration.Domain.AggregateModels.Bookmaker.Builder.Bookmake
         /// <summary>
         /// Creates new bookmaker.
         /// </summary>
-        /// <param name="BookmakerId">The bookmaker identifier.</param>
-        /// <param name="baseUrl">The base URL.</param>
+        /// <param name="bookmakerId">The bookmaker identifier.</param>
         /// <returns></returns>
-        IBookmakerBuilder NewBookmaker(Guid bookmakerId, string baseUrl);
+        IBookmakerBuilder NewBookmaker(Guid bookmakerId);
     }
 }

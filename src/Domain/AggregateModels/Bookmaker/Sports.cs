@@ -7,10 +7,13 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace BookmakerIntegration.Domain.AggregateModels.Sports
+namespace BookmakerIntegration.Domain.AggregateModels.Bookmaker
 {
+    using System;
     using System.Collections.Generic;
+    using System.Linq;
     using BookmakerIntegration.Domain.AggregateModels.Bookmaker.Enum;
+    using BookmakerIntegration.Domain.Exceptions;
     using BookmakerIntegration.Domain.SeedWork;
 
     /// <summary>
@@ -20,14 +23,17 @@ namespace BookmakerIntegration.Domain.AggregateModels.Sports
     public class Sports : EntityBase
     {
         /// <summary>
+        /// The competitions
+        /// </summary>
+        private readonly List<Competition> competitions;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="Sports"/> class.
         /// </summary>
-        /// <param name="url">The URL.</param>
         /// <param name="type">The type.</param>
-        internal Sports(SportType type, string url)
+        internal Sports(SportType type)
             : this()
         {
-            this.Url = url;
             this.Type = type;
         }
 
@@ -36,7 +42,14 @@ namespace BookmakerIntegration.Domain.AggregateModels.Sports
         /// </summary>
         protected Sports()
         {
+            this.competitions = new();
         }
+
+        /// <summary>
+        /// Gets the competitions.
+        /// </summary>
+        /// <value>The competitions.</value>
+        public IReadOnlyCollection<Competition> Competitions => this.competitions;
 
         /// <summary>
         /// Gets the type.
@@ -45,10 +58,29 @@ namespace BookmakerIntegration.Domain.AggregateModels.Sports
         public SportType Type { get; private set; }
 
         /// <summary>
-        /// Gets the URL.
+        /// Adds the competition.
         /// </summary>
-        /// <value>The URL.</value>
-        public string Url { get; private set; }
+        /// <param name="competition">The competition.</param>
+        /// <exception cref="ArgumentNullException">
+        /// competition - The Competition cannot be null.
+        /// </exception>
+        /// <exception cref="DuplicatedException">
+        /// The Competition with id {competition.CompetitionId} already exists.
+        /// </exception>
+        public void AddCompetition(Competition competition)
+        {
+            if (competition is null)
+            {
+                throw new ArgumentNullException(nameof(competition), "The Competition cannot be null.");
+            }
+
+            if (this.competitions.Any(x => x.CompetitionId == competition.CompetitionId))
+            {
+                throw new DuplicatedException($"The Competition with id {competition.CompetitionId} already exists.");
+            }
+
+            this.competitions.Add(competition);
+        }
 
         /// <summary>
         /// Gets the atomic values.

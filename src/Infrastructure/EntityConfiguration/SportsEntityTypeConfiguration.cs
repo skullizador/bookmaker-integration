@@ -10,8 +10,8 @@
 namespace BookmakerIntegration.Infrastructure.EntityConfiguration
 {
     using System;
+    using BookmakerIntegration.Domain.AggregateModels.Bookmaker;
     using BookmakerIntegration.Domain.AggregateModels.Bookmaker.Enum;
-    using BookmakerIntegration.Domain.AggregateModels.Sports;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
     /// <summary>
@@ -38,8 +38,7 @@ namespace BookmakerIntegration.Infrastructure.EntityConfiguration
                         v => (SportType)Enum.Parse(typeof(SportType), v))
                 .HasMaxLength(50);
 
-            builder.Property(p => p.Url)
-                .IsRequired();
+            builder.HasMany(b => b.Competitions);
         }
     }
 }

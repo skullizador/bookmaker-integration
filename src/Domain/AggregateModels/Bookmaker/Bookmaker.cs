@@ -12,7 +12,6 @@ namespace BookmakerIntegration.Domain.AggregateModels.Bookmaker
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using BookmakerIntegration.Domain.AggregateModels.Sports;
     using BookmakerIntegration.Domain.Exceptions;
     using BookmakerIntegration.Domain.SeedWork;
 
@@ -32,12 +31,10 @@ namespace BookmakerIntegration.Domain.AggregateModels.Bookmaker
         /// Initializes a new instance of the <see cref="Bookmaker"/> class.
         /// </summary>
         /// <param name="bookmakerId">The bookmaker identifier.</param>
-        /// <param name="baseUrl">The base URL.</param>
-        internal Bookmaker(Guid bookmakerId, string baseUrl)
+        internal Bookmaker(Guid bookmakerId)
             : this()
         {
             this.BookmakerId = bookmakerId;
-            this.BaseUrl = baseUrl;
         }
 
         /// <summary>
@@ -47,12 +44,6 @@ namespace BookmakerIntegration.Domain.AggregateModels.Bookmaker
         {
             this.sports = new List<Sports>();
         }
-
-        /// <summary>
-        /// Gets the base URL.
-        /// </summary>
-        /// <value>The base URL.</value>
-        public string BaseUrl { get; private set; }
 
         /// <summary>
         /// Gets the bookmaker identifier.

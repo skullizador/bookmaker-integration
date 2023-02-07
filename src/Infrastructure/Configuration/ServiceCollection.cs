@@ -27,6 +27,8 @@ namespace BookmakerIntegration.Infrastructure.Configuration
             services.AddScoped<IBookmakerRepository, BookmakerRepository>();
 
             services.AddScoped<ISportsRepository, SportsRepository>();
+
+            services.AddScoped<ICompetitionRepository, CompetitionRepository>();
         }
     }
 }

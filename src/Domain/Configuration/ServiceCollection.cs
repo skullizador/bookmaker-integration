@@ -10,6 +10,7 @@
 namespace BookmakerIntegration.Domain.Configuration
 {
     using BookmakerIntegration.Domain.AggregateModels.Bookmaker.Builder.Bookmaker;
+    using BookmakerIntegration.Domain.AggregateModels.Bookmaker.Builder.Competition;
     using BookmakerIntegration.Domain.AggregateModels.Bookmaker.Builder.Sports;
     using Microsoft.Extensions.DependencyInjection;
 
@@ -27,6 +28,8 @@ namespace BookmakerIntegration.Domain.Configuration
             services.AddScoped<IBookmakerBuilder, BookmakerBuilder>();
 
             services.AddScoped<ISportsBuilder, SportsBuilder>();
+
+            services.AddScoped<ICompetitionBuilder, CompetitionBuilder>();
         }
     }
 }

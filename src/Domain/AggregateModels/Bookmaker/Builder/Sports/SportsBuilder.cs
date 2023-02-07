@@ -9,8 +9,9 @@
 
 namespace BookmakerIntegration.Domain.AggregateModels.Bookmaker.Builder.Sports
 {
+    using System.Collections.Generic;
     using BookmakerIntegration.Domain.AggregateModels.Bookmaker.Enum;
-    using Domain.AggregateModels.Sports;
+    using Domain.AggregateModels.Bookmaker;
 
     /// <summary>
     /// <see cref="SportsBuilder"/> class
@@ -22,6 +23,21 @@ namespace BookmakerIntegration.Domain.AggregateModels.Bookmaker.Builder.Sports
         /// The sport
         /// </summary>
         private Sports sport;
+
+        /// <summary>
+        /// Adds the competitions.
+        /// </summary>
+        /// <param name="competitions"></param>
+        /// <returns></returns>
+        public ISportsBuilder AddCompetitions(List<Competition> competitions)
+        {
+            foreach (Competition competition in competitions)
+            {
+                this.sport.AddCompetition(competition);
+            }
+
+            return this;
+        }
 
         /// <summary>
         /// Builds this instance.
@@ -36,11 +52,10 @@ namespace BookmakerIntegration.Domain.AggregateModels.Bookmaker.Builder.Sports
         /// Creates new sport.
         /// </summary>
         /// <param name="sportType">Type of the sport.</param>
-        /// <param name="url">The URL.</param>
         /// <returns></returns>
-        public ISportsBuilder NewSport(SportType sportType, string url)
+        public ISportsBuilder NewSport(SportType sportType)
         {
-            this.sport = new Sports(sportType, url);
+            this.sport = new Sports(sportType);
 
             return this;
         }
