@@ -15,8 +15,8 @@ namespace BookmakerIntegration.Presentation.WebAPI.Queries.Betano.GetBetanoFootb
     /// <summary>
     /// <see cref="GetBetanoFootballDataQuery"/>
     /// </summary>
-    /// <seealso cref="IRequest{BetanoJsonDataModel}"/>
-    public class GetBetanoFootballDataQuery : IRequest<BetanoJsonDataModel>
+    /// <seealso cref="IRequest{List{BetanoBlocksDataModel}}"/>
+    public class GetBetanoFootballDataQuery : IRequest<List<BetanoBlocksDataModel>>
     {
         /// <summary>
         /// Gets the competition identifier.

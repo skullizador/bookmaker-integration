@@ -81,8 +81,6 @@ namespace BookmakerIntegration.Presentation.WebAPI.DataModels.Betano
         /// <value>The notes.</value>
         public string Notes { get; init; }
 
-        //TODO: MISSING PARTICIPANTS;
-
         /// <summary>
         /// Gets the region identifier.
         /// </summary>
@@ -112,8 +110,6 @@ namespace BookmakerIntegration.Presentation.WebAPI.DataModels.Betano
         /// </summary>
         /// <value>The start time.</value>
         public long StartTime { get; init; }
-
-        //TODO: MISSING STREAMOVERLAYMARKETIds;
 
         /// <summary>
         /// Gets the total markets available.

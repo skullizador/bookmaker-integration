@@ -25,8 +25,6 @@ namespace BookmakerIntegration.Presentation.WebAPI.DataModels.Betano
             this.Selections = new List<BetanoOddDataModel>();
         }
 
-        //TODO: MISSING EXACT SCORE SELECTIONS;
-
         /// <summary>
         /// Gets the handicap.
         /// </summary>
@@ -56,8 +54,6 @@ namespace BookmakerIntegration.Presentation.WebAPI.DataModels.Betano
         /// </summary>
         /// <value>The rendering layout.</value>
         public int RenderingLayout { get; init; }
-
-        //TODO: MISSING SCORERSELECTIONS;
 
         /// <summary>
         /// Gets the selections.

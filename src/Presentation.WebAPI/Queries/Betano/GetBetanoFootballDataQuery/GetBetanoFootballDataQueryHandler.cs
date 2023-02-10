@@ -17,7 +17,7 @@ namespace BookmakerIntegration.Presentation.WebAPI.Queries.Betano.GetBetanoFootb
     using MediatR;
     using Newtonsoft.Json;
 
-    public class GetBetanoFootballDataQueryHandler : IRequestHandler<GetBetanoFootballDataQuery, BetanoJsonDataModel>
+    public class GetBetanoFootballDataQueryHandler : IRequestHandler<GetBetanoFootballDataQuery, List<BetanoBlocksDataModel>>
     {
         private readonly ICompetitionRepository competitionRepository;
         private readonly IDataCollector dataCollector;
@@ -30,7 +30,7 @@ namespace BookmakerIntegration.Presentation.WebAPI.Queries.Betano.GetBetanoFootb
             this.dataCollector = dataCollector;
         }
 
-        public async Task<BetanoJsonDataModel> Handle(GetBetanoFootballDataQuery request, CancellationToken cancellationToken)
+        public async Task<List<BetanoBlocksDataModel>> Handle(GetBetanoFootballDataQuery request, CancellationToken cancellationToken)
         {
             //Competition competition = await this.competitionRepository.GetByCompetitionAsync(
             //request.CompetitionId,
@@ -43,10 +43,12 @@ namespace BookmakerIntegration.Presentation.WebAPI.Queries.Betano.GetBetanoFootb
 
             BetanoJsonDataModel? json = JsonConvert.DeserializeObject<BetanoJsonDataModel>(data);
 
-            //TODO: MAP DATA TO BETANOJSONDATAMODEL;
+            //TODO: MAP DATA TO BE SENT TO OTHER MICRO SERVICES;
             //TODO: SEND INFO TO OTHER MICRO SERVICES;
 
-            return json;
+            return json.Data.Blocks
+                .Where(b => b.ShortName == "Primeira Liga")
+                .ToList();
         }
     }
 }

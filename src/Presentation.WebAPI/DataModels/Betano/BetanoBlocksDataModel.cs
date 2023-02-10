@@ -32,8 +32,6 @@ namespace BookmakerIntegration.Presentation.WebAPI.DataModels.Betano
         /// <value>The events.</value>
         public List<BetanoGameDataModel> Events { get; init; }
 
-        //TODO: MISSING HEADERS;
-
         /// <summary>
         /// Gets the identifier.
         /// </summary>

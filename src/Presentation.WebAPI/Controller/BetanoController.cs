@@ -10,8 +10,10 @@
 namespace BookmakerIntegration.Presentation.WebAPI.Controller
 {
     using System.Net;
+    using AutoMapper;
     using BookmakerIntegration.Presentation.WebAPI.DataModels.Betano;
     using BookmakerIntegration.Presentation.WebAPI.Dtos.Input.Bookmaker;
+    using BookmakerIntegration.Presentation.WebAPI.Dtos.Output.Betano;
     using BookmakerIntegration.Presentation.WebAPI.Queries.Betano.GetBetanoFootballDataQuery;
     using BookmakerIntegration.Presentation.WebAPI.Utils;
     using MediatR;
@@ -26,6 +28,11 @@ namespace BookmakerIntegration.Presentation.WebAPI.Controller
     public class BetanoController : Controller
     {
         /// <summary>
+        /// The mapper
+        /// </summary>
+        private readonly IMapper mapper;
+
+        /// <summary>
         /// The mediator
         /// </summary>
         private readonly IMediator mediator;
@@ -33,9 +40,13 @@ namespace BookmakerIntegration.Presentation.WebAPI.Controller
         /// <summary>
         /// Initializes a new instance of the <see cref="BetanoController"/> class.
         /// </summary>
+        /// <param name="mapper">The mapper.</param>
         /// <param name="mediator">The mediator.</param>
-        public BetanoController(IMediator mediator)
+        public BetanoController(
+            IMapper mapper,
+            IMediator mediator)
         {
+            this.mapper = mapper;
             this.mediator = mediator;
         }
 
@@ -46,20 +57,18 @@ namespace BookmakerIntegration.Presentation.WebAPI.Controller
         /// <returns></returns>
         [HttpGet]
         [Route("Football/{CompetitionId}")]
-        [ProducesResponseType(typeof(BetanoJsonDataModel), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(BetanoBlockDto), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(ErrorMessage), (int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> GetFootballCompetitionDataAsync(
             [FromRoute] GetBookmakerDataByCompetitionIdDto filter,
             CancellationToken cancellationToken)
         {
-            BetanoJsonDataModel data = await this.mediator.Send(new GetBetanoFootballDataQuery
+            List<BetanoBlocksDataModel> blocks = await this.mediator.Send(new GetBetanoFootballDataQuery
             {
                 CompetitionId = filter.CompetitionId
             }, cancellationToken);
 
-            //TODO: CHANGE THE RETURN TO A DTO;
-
-            return this.Ok(data);
+            return this.Ok(this.mapper.Map<List<BetanoBlockDto>>(blocks));
         }
     }
 }
