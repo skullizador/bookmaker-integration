@@ -1,1 +1,1 @@
-# game-collector
+# bookmaker-integration
