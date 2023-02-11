@@ -9,6 +9,7 @@
 
 namespace BookmakerIntegration.Presentation.WebAPI.Configuration
 {
+    using BookmakerIntegration.Presentation.WebAPI.Services.DataCollector;
     using Microsoft.Extensions.DependencyInjection;
 
     /// <summary>
@@ -22,6 +23,7 @@ namespace BookmakerIntegration.Presentation.WebAPI.Configuration
         /// <param name="services">The services.</param>
         public static void RegisterPresentationServices(this IServiceCollection services)
         {
+            services.AddScoped<IDataCollector, DataCollector>();
         }
     }
 }

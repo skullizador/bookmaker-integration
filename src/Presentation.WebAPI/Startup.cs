@@ -52,7 +52,7 @@ namespace BookmakerIntegration.Presentation.WebAPI
         {
             if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") is "Development")
             {
-                MigrateDatabase(app);
+                //MigrateDatabase(app);
             }
 
             app.UseExceptionMiddleware();
