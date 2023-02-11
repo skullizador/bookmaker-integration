@@ -12,6 +12,7 @@ namespace BookmakerIntegration.Presentation.WebAPI.Services.DataCollector
     using System.Threading;
     using System.Threading.Tasks;
     using HtmlAgilityPack;
+    using RestSharp;
 
     /// <summary>
     /// <see cref="DataCollector"/>
@@ -45,32 +46,56 @@ namespace BookmakerIntegration.Presentation.WebAPI.Services.DataCollector
         /// <returns></returns>
         public async Task<string> CollectBetanoDataAsync(string url, CancellationToken cancellationToken)
         {
-            HtmlDocument page = await this.web.LoadFromWebAsync(url);
+            string data = await GetDataAsync(url, cancellationToken);
 
-            HtmlDocument htmlCode = new();
+            HtmlDocument page = new();
 
-            htmlCode.LoadHtml(page.DocumentNode.ChildNodes["html"].InnerHtml);
+            page.LoadHtml(data);
 
-            HtmlDocument body = new();
-
-            body.LoadHtml(htmlCode.DocumentNode.ChildNodes["body"].InnerHtml);
-
-            return body.DocumentNode.ChildNodes[BetanoScriptDataIndex].InnerHtml;
+            return page.DocumentNode.SelectSingleNode("//body")
+                .ChildNodes[BetanoScriptDataIndex]
+                .InnerHtml;
         }
 
-        public Task<string> CollectBetclicDataAsync(string url, CancellationToken cancellationToken)
+        /// <summary>
+        /// Collects the betclic data asynchronous.
+        /// </summary>
+        /// <param name="url">The URL.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns></returns>
+        public async Task<string> CollectBetclicDataAsync(string url, CancellationToken cancellationToken)
         {
-            HtmlDocument page = this.web.Load(url);
+            string data = await GetDataAsync(url, cancellationToken);
 
-            HtmlDocument htmlCode = new();
+            HtmlDocument page = new();
 
-            htmlCode.LoadHtml(page.DocumentNode.ChildNodes["html"].InnerHtml);
+            page.LoadHtml(data);
 
-            HtmlDocument body = new();
+            HtmlNodeCollection nodes = page.DocumentNode.SelectNodes("//sports-events-event");
 
-            body.LoadHtml(htmlCode.DocumentNode.ChildNodes["body"].InnerHtml);
+            //TODO: Get the data from the nodes;
 
-            return Task.FromResult("");
+            return data;
+        }
+
+        /// <summary>
+        /// Gets the data asynchronous.
+        /// </summary>
+        /// <param name="url">The URL.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns></returns>
+        private static async Task<string> GetDataAsync(string url, CancellationToken cancellationToken)
+        {
+            RestClient client = new(url);
+
+            RestRequest request = new(url, Method.Get);
+
+            request.AddHeader("postman-token", "dcf8a6ac-80a7-b255-1494-f5bfae5d04b8");
+            request.AddHeader("cache-control", "no-cache");
+
+            RestResponse response = await client.ExecuteAsync(request, cancellationToken);
+
+            return response.Content;
         }
     }
 }

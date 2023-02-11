@@ -32,7 +32,7 @@ namespace BookmakerIntegration.Presentation.WebAPI.Queries.Betclic.GetBetclicFoo
         {
             string data = await this.dataCollector.CollectBetclicDataAsync("https://www.betclic.pt/futebol-s1/portugal-primeira-liga-c32", cancellationToken);
 
-            return new List<string>();
+            return new List<string>() { data };
         }
     }
 }

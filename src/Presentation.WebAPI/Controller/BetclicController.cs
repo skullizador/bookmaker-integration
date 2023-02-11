@@ -49,7 +49,7 @@ namespace BookmakerIntegration.Presentation.WebAPI.Controller
 
             //var mappedResult = this.mapper.Map<BetclicBlockDto>(blocks);
 
-            return this.Ok();
+            return this.Ok(blocks);
         }
     }
 }
