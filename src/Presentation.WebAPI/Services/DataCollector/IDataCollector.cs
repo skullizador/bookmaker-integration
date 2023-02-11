@@ -21,5 +21,13 @@ namespace BookmakerIntegration.Presentation.WebAPI.Services.DataCollector
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns></returns>
         Task<string> CollectBetanoDataAsync(string url, CancellationToken cancellationToken);
+
+        /// <summary>
+        /// Collects the betclic data asynchronous.
+        /// </summary>
+        /// <param name="url">The URL.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns></returns>
+        Task<string> CollectBetclicDataAsync(string url, CancellationToken cancellationToken);
     }
 }

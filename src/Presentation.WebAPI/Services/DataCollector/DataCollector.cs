@@ -57,5 +57,20 @@ namespace BookmakerIntegration.Presentation.WebAPI.Services.DataCollector
 
             return body.DocumentNode.ChildNodes[BetanoScriptDataIndex].InnerHtml;
         }
+
+        public Task<string> CollectBetclicDataAsync(string url, CancellationToken cancellationToken)
+        {
+            HtmlDocument page = this.web.Load(url);
+
+            HtmlDocument htmlCode = new();
+
+            htmlCode.LoadHtml(page.DocumentNode.ChildNodes["html"].InnerHtml);
+
+            HtmlDocument body = new();
+
+            body.LoadHtml(htmlCode.DocumentNode.ChildNodes["body"].InnerHtml);
+
+            return Task.FromResult("");
+        }
     }
 }
