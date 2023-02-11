@@ -38,10 +38,10 @@ namespace BookmakerIntegration.Presentation.WebAPI.DataModels.Betano
         public string Id { get; init; }
 
         /// <summary>
-        /// Gets the market close timemillis.
+        /// Gets the market close time millis.
         /// </summary>
-        /// <value>The market close timemillis.</value>
-        public long MarketCloseTimemillis { get; init; }
+        /// <value>The market close time millis.</value>
+        public long MarketCloseTimeMillis { get; init; }
 
         /// <summary>
         /// Gets the name.

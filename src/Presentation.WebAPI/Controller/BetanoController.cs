@@ -58,6 +58,7 @@ namespace BookmakerIntegration.Presentation.WebAPI.Controller
         [HttpGet]
         [Route("Football/{CompetitionId}")]
         [ProducesResponseType(typeof(BetanoBlockDto), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(ErrorMessage), (int)HttpStatusCode.NotFound)]
         [ProducesResponseType(typeof(ErrorMessage), (int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> GetFootballCompetitionDataAsync(
             [FromRoute] GetBookmakerDataByCompetitionIdDto filter,
