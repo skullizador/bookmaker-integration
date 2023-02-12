@@ -11,6 +11,7 @@ namespace BookmakerIntegration.Presentation.WebAPI.Services.DataCollector
 {
     using System.Threading;
     using System.Threading.Tasks;
+    using BookmakerIntegration.Presentation.WebAPI.DataModels.Betclic;
     using HtmlAgilityPack;
     using RestSharp;
 
@@ -71,9 +72,7 @@ namespace BookmakerIntegration.Presentation.WebAPI.Services.DataCollector
 
             page.LoadHtml(data);
 
-            HtmlNodeCollection nodes = page.DocumentNode.SelectNodes("//sports-events-event");
-
-            //TODO: Get the data from the nodes;
+            BetclicCompetitionDataModel competition = BetclicCompetitionDataModel.DecodeHtml(page);
 
             return data;
         }
