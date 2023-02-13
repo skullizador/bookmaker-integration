@@ -9,11 +9,11 @@
 
 namespace BookmakerIntegration.Presentation.WebAPI.Queries.Betclic.GetBetclicFootballDataQuery
 {
+    using BookmakerIntegration.Presentation.WebAPI.DataModels.Betclic;
     using MediatR;
 
-    public class GetBetclicFootballDataQuery : IRequest<List<string>>
+    public class GetBetclicFootballDataQuery : IRequest<BetclicCompetitionDataModel>
     {
-        //TODO: Change the list type to Betclicdatamodel
         public Guid CompetitionId { get; init; }
     }
 }

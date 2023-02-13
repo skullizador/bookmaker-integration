@@ -64,7 +64,7 @@ namespace BookmakerIntegration.Presentation.WebAPI.Services.DataCollector
         /// <param name="url">The URL.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns></returns>
-        public async Task<string> CollectBetclicDataAsync(string url, CancellationToken cancellationToken)
+        public async Task<BetclicCompetitionDataModel> CollectBetclicDataAsync(string url, CancellationToken cancellationToken)
         {
             string data = await GetDataAsync(url, cancellationToken);
 
@@ -74,7 +74,7 @@ namespace BookmakerIntegration.Presentation.WebAPI.Services.DataCollector
 
             BetclicCompetitionDataModel competition = BetclicCompetitionDataModel.DecodeHtml(page);
 
-            return data;
+            return competition;
         }
 
         /// <summary>

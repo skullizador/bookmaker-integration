@@ -92,10 +92,11 @@ namespace BookmakerIntegration.Presentation.WebAPI.DataModels.Betclic
         /// <returns></returns>
         private static DateTime DecodeEventDate(HtmlNode node)
         {
-            string date = node.SelectSingleNode("//h2[@class='groupEvents_headTitle']").InnerText;
+            string date = node.SelectSingleNode("div/h2[@class=\"groupEvents_headTitle\"]").InnerText;
 
             return date switch
             {
+                "Agora" => DateTime.UtcNow.Date,
                 "Amanhã" => DateTime.UtcNow.AddDays(1).Date,
                 "Depois de amanhã" => DateTime.UtcNow.AddDays(2).Date,
                 _ => Convert.ToDateTime(date)
@@ -111,7 +112,7 @@ namespace BookmakerIntegration.Presentation.WebAPI.DataModels.Betclic
         {
             DateTime eventDate = DecodeEventDate(node);
 
-            HtmlNodeCollection gameNodes = node.SelectNodes("//sports-events-event");
+            HtmlNodeCollection gameNodes = node.SelectNodes("div/sports-events-event");
 
             foreach (HtmlNode gameNode in gameNodes)
             {

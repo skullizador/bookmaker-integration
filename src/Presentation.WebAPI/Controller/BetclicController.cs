@@ -11,6 +11,7 @@ namespace BookmakerIntegration.Presentation.WebAPI.Controller
 {
     using System.Net;
     using AutoMapper;
+    using BookmakerIntegration.Presentation.WebAPI.DataModels.Betclic;
     using BookmakerIntegration.Presentation.WebAPI.Dtos.Input.Bookmaker;
     using BookmakerIntegration.Presentation.WebAPI.Queries.Betclic.GetBetclicFootballDataQuery;
     using BookmakerIntegration.Presentation.WebAPI.Utils;
@@ -42,14 +43,14 @@ namespace BookmakerIntegration.Presentation.WebAPI.Controller
             [FromRoute] GetBookmakerDataByCompetitionIdDto filter,
             CancellationToken cancellationToken)
         {
-            List<string> blocks = await this.mediator.Send(new GetBetclicFootballDataQuery
+            BetclicCompetitionDataModel competitionData = await this.mediator.Send(new GetBetclicFootballDataQuery
             {
                 CompetitionId = filter.CompetitionId
             }, cancellationToken);
 
             //var mappedResult = this.mapper.Map<BetclicBlockDto>(blocks);
 
-            return this.Ok(blocks);
+            return this.Ok(competitionData);
         }
     }
 }
