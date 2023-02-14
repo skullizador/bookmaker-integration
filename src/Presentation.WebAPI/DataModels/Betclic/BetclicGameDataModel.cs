@@ -1,4 +1,4 @@
-// --------------------------------------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="BetclicGameDataModel.cs" company="HumbleBets">
 //     Copyright (c) HumbleBets. All rights reserved.
 // </copyright>
@@ -9,6 +9,7 @@
 
 namespace BookmakerIntegration.Presentation.WebAPI.DataModels.Betclic
 {
+    using BookmakerIntegration.Presentation.WebAPI.DataModels.Betclic.ConstantCollection;
     using HtmlAgilityPack;
 
     /// <summary>
@@ -65,17 +66,34 @@ namespace BookmakerIntegration.Presentation.WebAPI.DataModels.Betclic
         /// <returns></returns>
         public static BetclicGameDataModel DecodeHtml(HtmlNode html, DateTime date)
         {
-            HtmlNode scoreBoardNode = html.SelectSingleNode("a/div/scoreboards-scoreboard/scoreboards-scoreboard-global/div");
+            HtmlNode gameHtml = html.SelectSingleNode(BetclicConstantCollection.GameRootXPath.Value);
 
-            string teamAName = GetNodeValue(scoreBoardNode, "scoreboard_contestant scoreboard_contestant-1");
+            BetclicGameDataModel gameData = GetGameInfo(gameHtml, date);
 
-            string teamBName = GetNodeValue(scoreBoardNode, "scoreboard_contestant scoreboard_contestant-2");
+            GetGameOdds(gameHtml, gameData);
 
-            string gameHours = GetNodeValue(scoreBoardNode, "scoreboard_info");
+            return gameData;
+        }
+
+        /// <summary>
+        /// Gets the game information.
+        /// </summary>
+        /// <param name="html">The HTML.</param>
+        /// <param name="date">The date.</param>
+        /// <returns></returns>
+        private static BetclicGameDataModel GetGameInfo(HtmlNode html, DateTime date)
+        {
+            HtmlNode scoreBoardNode = html.SelectSingleNode(BetclicConstantCollection.GameScoreBoardXPath.Value);
+
+            string teamAName = GetNodeValue(scoreBoardNode, BetclicConstantCollection.GameTeamAAttributeValuePortion.Value);
+
+            string teamBName = GetNodeValue(scoreBoardNode, BetclicConstantCollection.GameTeamBAttributeValuePortion.Value);
+
+            string gameHours = GetNodeValue(scoreBoardNode, BetclicConstantCollection.GameHourAttributeValuePortion.Value);
 
             DateTime hours = Convert.ToDateTime(gameHours);
 
-            DateTime startDate = new DateTime(
+            DateTime startDate = new(
                 date.Year,
                 date.Month,
                 date.Day,
@@ -83,11 +101,30 @@ namespace BookmakerIntegration.Presentation.WebAPI.DataModels.Betclic
                 hours.Minute,
                 hours.Second);
 
-            return new BetclicGameDataModel
+            return new()
             {
                 Name = $"{teamAName} - {teamBName}",
-                StartDate = startDate
+                TeamAName = teamAName,
+                TeamBName = teamBName,
+                StartDate = startDate,
             };
+        }
+
+        /// <summary>
+        /// Gets the game odds.
+        /// </summary>
+        /// <param name="html">The HTML.</param>
+        /// <param name="gameData">The game data.</param>
+        private static void GetGameOdds(HtmlNode html, BetclicGameDataModel gameData)
+        {
+            HtmlNodeCollection oddsNodes = html.SelectNodes(BetclicConstantCollection.GameOddsXPath.Value);
+
+            foreach (HtmlNode oddNode in oddsNodes)
+            {
+                BetclicOddDataModel oddData = BetclicOddDataModel.DecodeHtml(oddNode);
+
+                gameData.Odds.Add(oddData);
+            }
         }
 
         /// <summary>
@@ -99,14 +136,14 @@ namespace BookmakerIntegration.Presentation.WebAPI.DataModels.Betclic
         private static string GetNodeValue(HtmlNode node, string attributeValuePortion)
         {
             HtmlNode childNode = node.ChildNodes
-                .SingleOrDefault(x => x.Attributes
+                .Single(x => x.Attributes
                     .Any(f => f.Value
                         .Contains(attributeValuePortion)));
 
-            return childNode.SelectSingleNode("div")
+            return childNode.SelectSingleNode(BetclicConstantCollection.GameInfoAuxiliarXPath.Value)
                 .InnerText
                 .TrimStart()
-                .TrimEnd(); ;
+                .TrimEnd();
         }
     }
 }

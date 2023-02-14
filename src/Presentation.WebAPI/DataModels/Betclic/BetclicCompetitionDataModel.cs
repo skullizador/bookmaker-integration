@@ -9,6 +9,7 @@
 
 namespace BookmakerIntegration.Presentation.WebAPI.DataModels.Betclic
 {
+    using BookmakerIntegration.Presentation.WebAPI.DataModels.Betclic.ConstantCollection;
     using HtmlAgilityPack;
 
     /// <summary>
@@ -16,11 +17,6 @@ namespace BookmakerIntegration.Presentation.WebAPI.DataModels.Betclic
     /// </summary>
     public class BetclicCompetitionDataModel
     {
-        /// <summary>
-        /// The competition header node index
-        /// </summary>
-        private const int CompetitionHeaderNodeIndex = 3;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="BetclicCompetitionDataModel"/> class.
         /// </summary>
@@ -56,22 +52,11 @@ namespace BookmakerIntegration.Presentation.WebAPI.DataModels.Betclic
         /// <returns></returns>
         public static BetclicCompetitionDataModel DecodeHtml(HtmlDocument html)
         {
-            HtmlNode header = html.DocumentNode.SelectSingleNode("//sports-competition-header");
+            HtmlNode header = html.DocumentNode.SelectSingleNode(BetclicConstantCollection.CompetitionHeaderXPath.Value);
 
-            HtmlNode competitionLabel = header.SelectSingleNode("//bcdk-breadcrumb-item[@class='breadcrumb_item is-ellipsis ng-star-inserted']/span");
+            HtmlNode competitionLabel = header.SelectSingleNode(BetclicConstantCollection.CompetitionLabelXPath.Value);
 
-            //HtmlNode competitionLabel = competitionNode.SelectSingleNode("//span");
-
-            HtmlNodeCollection eventNodes = html.DocumentNode.SelectNodes("//div[@class=\"groupEvents ng-star-inserted\"]");
-
-            List<BetclicGameDataModel> games = new();
-
-            foreach (HtmlNode eventNode in eventNodes)
-            {
-                DecodeEventGames(eventNode, games);
-            }
-
-            string[] data = competitionLabel.InnerText.Split('-');
+            string[] data = competitionLabel.InnerText.Split(BetclicConstantCollection.CompetitionLabelCharSpliiter.Value);
 
             return new BetclicCompetitionDataModel
             {
@@ -81,7 +66,7 @@ namespace BookmakerIntegration.Presentation.WebAPI.DataModels.Betclic
                 Country = data[0]
                     .TrimStart()
                     .TrimEnd(),
-                Games = games
+                Games = GetCompetitionGames(html)
             };
         }
 
@@ -92,7 +77,8 @@ namespace BookmakerIntegration.Presentation.WebAPI.DataModels.Betclic
         /// <returns></returns>
         private static DateTime DecodeEventDate(HtmlNode node)
         {
-            string date = node.SelectSingleNode("div/h2[@class=\"groupEvents_headTitle\"]").InnerText;
+            string date = node.SelectSingleNode(BetclicConstantCollection.EventDateXPath.Value)
+                .InnerText;
 
             return date switch
             {
@@ -112,7 +98,7 @@ namespace BookmakerIntegration.Presentation.WebAPI.DataModels.Betclic
         {
             DateTime eventDate = DecodeEventDate(node);
 
-            HtmlNodeCollection gameNodes = node.SelectNodes("div/sports-events-event");
+            HtmlNodeCollection gameNodes = node.SelectNodes(BetclicConstantCollection.EventGamesXPath.Value);
 
             foreach (HtmlNode gameNode in gameNodes)
             {
@@ -120,6 +106,25 @@ namespace BookmakerIntegration.Presentation.WebAPI.DataModels.Betclic
 
                 games.Add(game);
             }
+        }
+
+        /// <summary>
+        /// Gets the competition games.
+        /// </summary>
+        /// <param name="html">The HTML.</param>
+        /// <returns></returns>
+        private static List<BetclicGameDataModel> GetCompetitionGames(HtmlDocument html)
+        {
+            HtmlNodeCollection eventNodes = html.DocumentNode.SelectNodes(BetclicConstantCollection.EventXPath.Value);
+
+            List<BetclicGameDataModel> games = new();
+
+            foreach (HtmlNode eventNode in eventNodes)
+            {
+                DecodeEventGames(eventNode, games);
+            }
+
+            return games;
         }
     }
 }
