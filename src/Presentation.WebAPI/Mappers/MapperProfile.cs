@@ -84,7 +84,7 @@ namespace BookmakerIntegration.Presentation.WebAPI.Mappers
         /// <returns></returns>
         private static List<BetanoOddDataModel> GetOdds(List<BetanoMarketDataModel> markets)
         {
-            return markets.SingleOrDefault(x => x.Name == "Resultado Final")
+            return markets.Single(x => x.Name == "Resultado Final")
                 .Selections;
         }
 
