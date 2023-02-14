@@ -11,7 +11,9 @@ namespace BookmakerIntegration.Presentation.WebAPI.Mappers
 {
     using AutoMapper;
     using BookmakerIntegration.Presentation.WebAPI.DataModels.Betano;
+    using BookmakerIntegration.Presentation.WebAPI.DataModels.Betclic;
     using BookmakerIntegration.Presentation.WebAPI.Dtos.Output.Betano;
+    using BookmakerIntegration.Presentation.WebAPI.Dtos.Output.Betclic;
 
     /// <summary>
     /// <see cref="MapperProfile"/>
@@ -24,6 +26,12 @@ namespace BookmakerIntegration.Presentation.WebAPI.Mappers
         /// </summary>
         public MapperProfile()
         {
+            this.CreateMap<BetclicCompetitionDataModel, BetclicCompetitionDto>();
+
+            this.CreateMap<BetclicGameDataModel, BetclicGameDto>();
+
+            this.CreateMap<BetclicOddDataModel, BetclicOddDto>();
+
             this.CreateMap<BetanoBlocksDataModel, BetanoBlockDto>()
                 .ForMember(
                 dest => dest.League,

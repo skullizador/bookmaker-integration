@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="BetclicGameDataModel.cs" company="HumbleBets">
 //     Copyright (c) HumbleBets. All rights reserved.
 // </copyright>
@@ -22,6 +22,8 @@ namespace BookmakerIntegration.Presentation.WebAPI.DataModels.Betclic
         public BetclicGameDataModel()
         {
             this.Name = string.Empty;
+            this.TeamBName = string.Empty;
+            this.TeamAName = string.Empty;
             this.Odds = new();
         }
 
@@ -29,19 +31,31 @@ namespace BookmakerIntegration.Presentation.WebAPI.DataModels.Betclic
         /// Gets the name.
         /// </summary>
         /// <value>The name.</value>
-        public string Name { get; init; }
+        public string Name { get; private set; }
 
         /// <summary>
         /// Gets the odds.
         /// </summary>
         /// <value>The odds.</value>
-        public List<BetclicOddDataModel> Odds { get; init; }
+        public List<BetclicOddDataModel> Odds { get; private set; }
 
         /// <summary>
         /// Gets the start date.
         /// </summary>
         /// <value>The start date.</value>
-        public DateTime StartDate { get; init; }
+        public DateTime StartDate { get; private set; }
+
+        /// <summary>
+        /// Gets the name of the team a.
+        /// </summary>
+        /// <value>The name of the team a.</value>
+        public string TeamAName { get; private set; }
+
+        /// <summary>
+        /// Gets the name of the team b.
+        /// </summary>
+        /// <value>The name of the team b.</value>
+        public string TeamBName { get; private set; }
 
         /// <summary>
         /// Decodes the HTML.

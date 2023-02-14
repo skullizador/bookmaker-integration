@@ -13,19 +13,35 @@ namespace BookmakerIntegration.Presentation.WebAPI.Controller
     using AutoMapper;
     using BookmakerIntegration.Presentation.WebAPI.DataModels.Betclic;
     using BookmakerIntegration.Presentation.WebAPI.Dtos.Input.Bookmaker;
+    using BookmakerIntegration.Presentation.WebAPI.Dtos.Output.Betclic;
     using BookmakerIntegration.Presentation.WebAPI.Queries.Betclic.GetBetclicFootballDataQuery;
     using BookmakerIntegration.Presentation.WebAPI.Utils;
     using MediatR;
     using Microsoft.AspNetCore.Mvc;
 
+    /// <summary>
+    /// <see cref="BetclicController"/>
+    /// </summary>
+    /// <seealso cref="Controller"/>
     [ApiController]
     [Route("api/v1/Betclic")]
     public class BetclicController : Controller
     {
+        /// <summary>
+        /// The mapper
+        /// </summary>
         private readonly IMapper mapper;
 
+        /// <summary>
+        /// The mediator
+        /// </summary>
         private readonly IMediator mediator;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BetclicController"/> class.
+        /// </summary>
+        /// <param name="mapper">The mapper.</param>
+        /// <param name="mediator">The mediator.</param>
         public BetclicController(
             IMapper mapper,
             IMediator mediator)
@@ -34,9 +50,15 @@ namespace BookmakerIntegration.Presentation.WebAPI.Controller
             this.mediator = mediator;
         }
 
+        /// <summary>
+        /// Gets the football competition data asynchronous.
+        /// </summary>
+        /// <param name="filter">The filter.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns></returns>
         [HttpGet]
         [Route("Football/{CompetitionId}")]
-        //[ProducesResponseType(typeof(BetclicBlockDto), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(BetclicCompetitionDto), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(ErrorMessage), (int)HttpStatusCode.NotFound)]
         [ProducesResponseType(typeof(ErrorMessage), (int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> GetFootballCompetitionDataAsync(
@@ -48,9 +70,7 @@ namespace BookmakerIntegration.Presentation.WebAPI.Controller
                 CompetitionId = filter.CompetitionId
             }, cancellationToken);
 
-            //var mappedResult = this.mapper.Map<BetclicBlockDto>(blocks);
-
-            return this.Ok(competitionData);
+            return this.Ok(this.mapper.Map<BetclicCompetitionDto>(competitionData));
         }
     }
 }
