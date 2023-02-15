@@ -11,6 +11,7 @@ namespace BookmakerIntegration.Presentation.WebAPI.Mappers
 {
     using AutoMapper;
     using BookmakerIntegration.Presentation.WebAPI.DataModels.Betano;
+    using BookmakerIntegration.Presentation.WebAPI.DataModels.Betano.ConstantCollection;
     using BookmakerIntegration.Presentation.WebAPI.DataModels.Betclic;
     using BookmakerIntegration.Presentation.WebAPI.Dtos.Output.Betano;
     using BookmakerIntegration.Presentation.WebAPI.Dtos.Output.Betclic;
@@ -84,7 +85,7 @@ namespace BookmakerIntegration.Presentation.WebAPI.Mappers
         /// <returns></returns>
         private static List<BetanoOddDataModel> GetOdds(List<BetanoMarketDataModel> markets)
         {
-            return markets.Single(x => x.Name == "Resultado Final")
+            return markets.Single(x => x.Name == BetanoConstantCollection.BetanoCurrentWantedOdds.Value)
                 .Selections;
         }
 

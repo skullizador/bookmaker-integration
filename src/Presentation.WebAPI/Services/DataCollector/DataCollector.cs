@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="DataCollector.cs" company="HumbleBets">
 //     Copyright (c) HumbleBets. All rights reserved.
 // </copyright>
@@ -11,7 +11,9 @@ namespace BookmakerIntegration.Presentation.WebAPI.Services.DataCollector
 {
     using System.Threading;
     using System.Threading.Tasks;
+    using BookmakerIntegration.Presentation.WebAPI.DataModels.Betano;
     using BookmakerIntegration.Presentation.WebAPI.DataModels.Betclic;
+    using BookmakerIntegration.Presentation.WebAPI.DataModels.Betclic.ConstantCollection;
     using HtmlAgilityPack;
     using RestSharp;
 
@@ -22,30 +24,12 @@ namespace BookmakerIntegration.Presentation.WebAPI.Services.DataCollector
     public class DataCollector : IDataCollector
     {
         /// <summary>
-        /// The betano script data index
-        /// </summary>
-        private const int BetanoScriptDataIndex = 1;
-
-        /// <summary>
-        /// The web
-        /// </summary>
-        private readonly HtmlWeb web;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="DataCollector"/> class.
-        /// </summary>
-        public DataCollector()
-        {
-            this.web = new HtmlWeb();
-        }
-
-        /// <summary>
         /// Collects the betano data asynchronous.
         /// </summary>
         /// <param name="url">The URL.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns></returns>
-        public async Task<string> CollectBetanoDataAsync(string url, CancellationToken cancellationToken)
+        public async Task<BetanoJsonDataModel> CollectBetanoDataAsync(string url, CancellationToken cancellationToken)
         {
             string data = await GetDataAsync(url, cancellationToken);
 
@@ -53,9 +37,7 @@ namespace BookmakerIntegration.Presentation.WebAPI.Services.DataCollector
 
             page.LoadHtml(data);
 
-            return page.DocumentNode.SelectSingleNode("//body")
-                .ChildNodes[BetanoScriptDataIndex]
-                .InnerHtml;
+            return BetanoJsonDataModel.DecodeHtml(page);
         }
 
         /// <summary>
