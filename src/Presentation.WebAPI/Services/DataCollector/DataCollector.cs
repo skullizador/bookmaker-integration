@@ -11,7 +11,11 @@ namespace BookmakerIntegration.Presentation.WebAPI.Services.DataCollector
 {
     using System.Threading;
     using System.Threading.Tasks;
+    using BookmakerIntegration.Presentation.WebAPI.DataModels.Betano;
+    using BookmakerIntegration.Presentation.WebAPI.DataModels.Betclic;
+    using BookmakerIntegration.Presentation.WebAPI.DataModels.Betclic.ConstantCollection;
     using HtmlAgilityPack;
+    using RestSharp;
 
     /// <summary>
     /// <see cref="DataCollector"/>
@@ -20,42 +24,59 @@ namespace BookmakerIntegration.Presentation.WebAPI.Services.DataCollector
     public class DataCollector : IDataCollector
     {
         /// <summary>
-        /// The betano script data index
-        /// </summary>
-        private const int BetanoScriptDataIndex = 1;
-
-        /// <summary>
-        /// The web
-        /// </summary>
-        private readonly HtmlWeb web;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="DataCollector"/> class.
-        /// </summary>
-        public DataCollector()
-        {
-            this.web = new HtmlWeb();
-        }
-
-        /// <summary>
         /// Collects the betano data asynchronous.
         /// </summary>
         /// <param name="url">The URL.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns></returns>
-        public async Task<string> CollectBetanoDataAsync(string url, CancellationToken cancellationToken)
+        public async Task<BetanoJsonDataModel> CollectBetanoDataAsync(string url, CancellationToken cancellationToken)
         {
-            HtmlDocument page = await this.web.LoadFromWebAsync(url);
+            string data = await GetDataAsync(url, cancellationToken);
 
-            HtmlDocument htmlCode = new();
+            HtmlDocument page = new();
 
-            htmlCode.LoadHtml(page.DocumentNode.ChildNodes["html"].InnerHtml);
+            page.LoadHtml(data);
 
-            HtmlDocument body = new();
+            return BetanoJsonDataModel.DecodeHtml(page);
+        }
 
-            body.LoadHtml(htmlCode.DocumentNode.ChildNodes["body"].InnerHtml);
+        /// <summary>
+        /// Collects the betclic data asynchronous.
+        /// </summary>
+        /// <param name="url">The URL.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns></returns>
+        public async Task<BetclicCompetitionDataModel> CollectBetclicDataAsync(string url, CancellationToken cancellationToken)
+        {
+            string data = await GetDataAsync(url, cancellationToken);
 
-            return body.DocumentNode.ChildNodes[BetanoScriptDataIndex].InnerHtml;
+            HtmlDocument page = new();
+
+            page.LoadHtml(data);
+
+            BetclicCompetitionDataModel competition = BetclicCompetitionDataModel.DecodeHtml(page);
+
+            return competition;
+        }
+
+        /// <summary>
+        /// Gets the data asynchronous.
+        /// </summary>
+        /// <param name="url">The URL.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns></returns>
+        private static async Task<string> GetDataAsync(string url, CancellationToken cancellationToken)
+        {
+            RestClient client = new(url);
+
+            RestRequest request = new(url, Method.Get);
+
+            request.AddHeader(BetclicConstantCollection.RequestPostmanTokenHeader.Name, BetclicConstantCollection.RequestPostmanTokenHeader.Value);
+            request.AddHeader(BetclicConstantCollection.RequestCacheControlHeader.Name, BetclicConstantCollection.RequestCacheControlHeader.Value);
+
+            RestResponse response = await client.ExecuteAsync(request, cancellationToken);
+
+            return response.Content;
         }
     }
 }
