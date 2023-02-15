@@ -1,4 +1,4 @@
-// --------------------------------------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="DataCollector.cs" company="HumbleBets">
 //     Copyright (c) HumbleBets. All rights reserved.
 // </copyright>
@@ -71,8 +71,8 @@ namespace BookmakerIntegration.Presentation.WebAPI.Services.DataCollector
 
             RestRequest request = new(url, Method.Get);
 
-            request.AddHeader("postman-token", "dcf8a6ac-80a7-b255-1494-f5bfae5d04b8");
-            request.AddHeader("cache-control", "no-cache");
+            request.AddHeader(BetclicConstantCollection.RequestPostmanTokenHeader.Name, BetclicConstantCollection.RequestPostmanTokenHeader.Value);
+            request.AddHeader(BetclicConstantCollection.RequestCacheControlHeader.Name, BetclicConstantCollection.RequestCacheControlHeader.Value);
 
             RestResponse response = await client.ExecuteAsync(request, cancellationToken);
 

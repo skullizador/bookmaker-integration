@@ -17,11 +17,19 @@ namespace BookmakerIntegration.Presentation.WebAPI.DataModels.Betclic.ConstantCo
         /// <summary>
         /// Initializes a new instance of the <see cref="BetclicConstant"/> class.
         /// </summary>
+        /// <param name="name">The name.</param>
         /// <param name="value">The value.</param>
-        public BetclicConstant(string value)
+        public BetclicConstant(string name, string value)
         {
+            this.Name = name;
             this.Value = value;
         }
+
+        /// <summary>
+        /// Gets the name.
+        /// </summary>
+        /// <value>The name.</value>
+        public string Name { get; init; }
 
         /// <summary>
         /// Gets the value.

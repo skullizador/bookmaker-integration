@@ -12,8 +12,16 @@ namespace BookmakerIntegration.Presentation.WebAPI.Queries.Betclic.GetBetclicFoo
     using BookmakerIntegration.Presentation.WebAPI.DataModels.Betclic;
     using MediatR;
 
+    /// <summary>
+    /// <see cref="GetBetclicFootballDataQuery"/>
+    /// </summary>
+    /// <seealso cref="IRequest{BetclicCompetitionDataModel}"/>
     public class GetBetclicFootballDataQuery : IRequest<BetclicCompetitionDataModel>
     {
+        /// <summary>
+        /// Gets the competition identifier.
+        /// </summary>
+        /// <value>The competition identifier.</value>
         public Guid CompetitionId { get; init; }
     }
 }
