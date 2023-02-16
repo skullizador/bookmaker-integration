@@ -71,6 +71,7 @@ namespace BookmakerIntegration.Presentation.WebAPI.Services.DataCollector
 
             RestRequest request = new(url, Method.Get);
 
+            //TODO: CHANGE THIS TO WORK ON MULTI BOOKMAKERS;
             request.AddHeader(BetclicConstantCollection.RequestPostmanTokenHeader.Name, BetclicConstantCollection.RequestPostmanTokenHeader.Value);
             request.AddHeader(BetclicConstantCollection.RequestCacheControlHeader.Name, BetclicConstantCollection.RequestCacheControlHeader.Value);
 

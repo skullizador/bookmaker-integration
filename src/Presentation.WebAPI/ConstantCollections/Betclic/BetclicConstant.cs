@@ -9,10 +9,13 @@
 
 namespace BookmakerIntegration.Presentation.WebAPI.ConstantCollections.Betclic
 {
+    using BookmakerIntegration.Presentation.WebAPI.Utils;
+
     /// <summary>
     /// <see cref="BetclicConstant"/>
     /// </summary>
-    public class BetclicConstant
+    /// <seealso cref="ConstantObject"/>
+    public class BetclicConstant : ConstantObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="BetclicConstant"/> class.
@@ -20,9 +23,9 @@ namespace BookmakerIntegration.Presentation.WebAPI.ConstantCollections.Betclic
         /// <param name="name">The name.</param>
         /// <param name="value">The value.</param>
         public BetclicConstant(string name, string value)
+            : base(value)
         {
             Name = name;
-            Value = value;
         }
 
         /// <summary>
@@ -30,11 +33,5 @@ namespace BookmakerIntegration.Presentation.WebAPI.ConstantCollections.Betclic
         /// </summary>
         /// <value>The name.</value>
         public string Name { get; init; }
-
-        /// <summary>
-        /// Gets the value.
-        /// </summary>
-        /// <value>The value.</value>
-        public string Value { get; init; }
     }
 }
