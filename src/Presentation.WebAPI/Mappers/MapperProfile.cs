@@ -10,8 +10,8 @@
 namespace BookmakerIntegration.Presentation.WebAPI.Mappers
 {
     using AutoMapper;
+    using BookmakerIntegration.Presentation.WebAPI.ConstantCollections.Betano;
     using BookmakerIntegration.Presentation.WebAPI.DataModels.Betano;
-    using BookmakerIntegration.Presentation.WebAPI.DataModels.Betano.ConstantCollection;
     using BookmakerIntegration.Presentation.WebAPI.DataModels.Betclic;
     using BookmakerIntegration.Presentation.WebAPI.Dtos.Output.Betano;
     using BookmakerIntegration.Presentation.WebAPI.Dtos.Output.Betclic;

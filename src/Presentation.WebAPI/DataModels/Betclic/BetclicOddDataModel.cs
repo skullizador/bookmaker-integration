@@ -9,7 +9,7 @@
 
 namespace BookmakerIntegration.Presentation.WebAPI.DataModels.Betclic
 {
-    using BookmakerIntegration.Presentation.WebAPI.DataModels.Betclic.ConstantCollection;
+    using BookmakerIntegration.Presentation.WebAPI.ConstantCollections.Betclic;
     using HtmlAgilityPack;
 
     /// <summary>

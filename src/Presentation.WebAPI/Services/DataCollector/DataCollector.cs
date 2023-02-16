@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="DataCollector.cs" company="HumbleBets">
 //     Copyright (c) HumbleBets. All rights reserved.
 // </copyright>
@@ -11,9 +11,9 @@ namespace BookmakerIntegration.Presentation.WebAPI.Services.DataCollector
 {
     using System.Threading;
     using System.Threading.Tasks;
+    using BookmakerIntegration.Presentation.WebAPI.ConstantCollections.Betclic;
     using BookmakerIntegration.Presentation.WebAPI.DataModels.Betano;
     using BookmakerIntegration.Presentation.WebAPI.DataModels.Betclic;
-    using BookmakerIntegration.Presentation.WebAPI.DataModels.Betclic.ConstantCollection;
     using HtmlAgilityPack;
     using RestSharp;
 

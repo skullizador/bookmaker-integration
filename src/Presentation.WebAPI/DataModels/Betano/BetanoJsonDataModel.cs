@@ -9,7 +9,7 @@
 
 namespace BookmakerIntegration.Presentation.WebAPI.DataModels.Betano
 {
-    using BookmakerIntegration.Presentation.WebAPI.DataModels.Betano.ConstantCollection;
+    using BookmakerIntegration.Presentation.WebAPI.ConstantCollections.Betano;
     using HtmlAgilityPack;
     using Newtonsoft.Json;
 
