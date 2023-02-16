@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace BookmakerIntegration.Presentation.WebAPI.Utils
+namespace BookmakerIntegration.Domain.Utils
 {
     /// <summary>
     /// <see cref="ConstantObject"/>

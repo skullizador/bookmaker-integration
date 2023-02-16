@@ -11,11 +11,10 @@ namespace BookmakerIntegration.Presentation.WebAPI.Services.DataCollector
 {
     using System.Threading;
     using System.Threading.Tasks;
-    using BookmakerIntegration.Presentation.WebAPI.ConstantCollections.Betclic;
-    using BookmakerIntegration.Presentation.WebAPI.DataModels.Betano;
-    using BookmakerIntegration.Presentation.WebAPI.DataModels.Betclic;
+    using BookmakerIntegration.Domain.DataModels.Betano;
+    using BookmakerIntegration.Domain.DataModels.Betclic;
+    using BookmakerIntegration.Infrastructure.Gateway.WebGateway;
     using HtmlAgilityPack;
-    using RestSharp;
 
     /// <summary>
     /// <see cref="DataCollector"/>
@@ -23,6 +22,20 @@ namespace BookmakerIntegration.Presentation.WebAPI.Services.DataCollector
     /// <seealso cref="IDataCollector"/>
     public class DataCollector : IDataCollector
     {
+        /// <summary>
+        /// The web gateway
+        /// </summary>
+        private readonly IWebGateway webGateway;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DataCollector"/> class.
+        /// </summary>
+        /// <param name="webGateway">The web gateway.</param>
+        public DataCollector(IWebGateway webGateway)
+        {
+            this.webGateway = webGateway;
+        }
+
         /// <summary>
         /// Collects the betano data asynchronous.
         /// </summary>

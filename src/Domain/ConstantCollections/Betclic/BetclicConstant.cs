@@ -7,9 +7,9 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace BookmakerIntegration.Presentation.WebAPI.ConstantCollections.Betclic
+namespace BookmakerIntegration.Domain.ConstantCollections.Betclic
 {
-    using BookmakerIntegration.Presentation.WebAPI.Utils;
+    using BookmakerIntegration.Domain.Utils;
 
     /// <summary>
     /// <see cref="BetclicConstant"/>

@@ -9,7 +9,7 @@
 
 namespace BookmakerIntegration.Presentation.WebAPI.Queries.Betano.GetBetanoFootballDataQuery
 {
-    using BookmakerIntegration.Presentation.WebAPI.DataModels.Betano;
+    using BookmakerIntegration.Domain.DataModels.Betano;
     using MediatR;
 
     /// <summary>

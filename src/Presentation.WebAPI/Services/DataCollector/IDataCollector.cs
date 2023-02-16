@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="IDataCollector.cs" company="HumbleBets">
 //     Copyright (c) HumbleBets. All rights reserved.
 // </copyright>
@@ -9,8 +9,8 @@
 
 namespace BookmakerIntegration.Presentation.WebAPI.Services.DataCollector
 {
-    using BookmakerIntegration.Presentation.WebAPI.DataModels.Betano;
-    using BookmakerIntegration.Presentation.WebAPI.DataModels.Betclic;
+    using BookmakerIntegration.Domain.DataModels.Betano;
+    using BookmakerIntegration.Domain.DataModels.Betclic;
 
     /// <summary>
     /// IDataCollector
@@ -32,5 +32,13 @@ namespace BookmakerIntegration.Presentation.WebAPI.Services.DataCollector
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns></returns>
         Task<BetclicCompetitionDataModel> CollectBetclicDataAsync(string url, CancellationToken cancellationToken);
+
+        /// <summary>
+        /// Collects the placard data asynchronous.
+        /// </summary>
+        /// <param name="url">The URL.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns></returns>
+        Task<string> CollectPlacardDataAsync(string url, CancellationToken cancellationToken);
     }
 }

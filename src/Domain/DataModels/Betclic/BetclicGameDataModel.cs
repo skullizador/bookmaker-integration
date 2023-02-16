@@ -7,9 +7,12 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace BookmakerIntegration.Presentation.WebAPI.DataModels.Betclic
+namespace BookmakerIntegration.Domain.DataModels.Betclic
 {
-    using BookmakerIntegration.Presentation.WebAPI.ConstantCollections.Betclic;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using BookmakerIntegration.Domain.ConstantCollections.Betclic;
     using HtmlAgilityPack;
 
     /// <summary>
