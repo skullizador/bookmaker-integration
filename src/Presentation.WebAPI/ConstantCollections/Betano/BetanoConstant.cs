@@ -1,35 +1,27 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="BetclicOddDataModel.cs" company="HumbleBets">
+// <copyright file="BetanoConstant.cs" company="HumbleBets">
 //     Copyright (c) HumbleBets. All rights reserved.
 // </copyright>
 // <summary>
-// BetclicOddDataModel
+// BetanoConstant
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace BookmakerIntegration.Presentation.WebAPI.DataModels.Betclic.ConstantCollection
+namespace BookmakerIntegration.Presentation.WebAPI.ConstantCollections.Betano
 {
     /// <summary>
-    /// <see cref="BetclicConstant"/>
+    /// <see cref="BetanoConstant"/>
     /// </summary>
-    public class BetclicConstant
+    public class BetanoConstant
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="BetclicConstant"/> class.
+        /// Initializes a new instance of the <see cref="BetanoConstant"/> class.
         /// </summary>
-        /// <param name="name">The name.</param>
         /// <param name="value">The value.</param>
-        public BetclicConstant(string name, string value)
+        public BetanoConstant(string value)
         {
-            this.Name = name;
-            this.Value = value;
+            Value = value;
         }
-
-        /// <summary>
-        /// Gets the name.
-        /// </summary>
-        /// <value>The name.</value>
-        public string Name { get; init; }
 
         /// <summary>
         /// Gets the value.

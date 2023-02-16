@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace BookmakerIntegration.Presentation.WebAPI.DataModels.Betclic.ConstantCollection
+namespace BookmakerIntegration.Presentation.WebAPI.ConstantCollections.Betclic
 {
     /// <summary>
     /// <see cref="BetclicConstantCollection"/>

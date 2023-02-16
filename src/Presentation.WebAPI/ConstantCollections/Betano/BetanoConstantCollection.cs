@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace BookmakerIntegration.Presentation.WebAPI.DataModels.Betano.ConstantCollection
+namespace BookmakerIntegration.Presentation.WebAPI.ConstantCollections.Betano
 {
     /// <summary>
     /// <see cref="BetanoConstantCollection"/>
