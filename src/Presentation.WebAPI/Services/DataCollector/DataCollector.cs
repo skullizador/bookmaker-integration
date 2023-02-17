@@ -1,4 +1,4 @@
-// --------------------------------------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="DataCollector.cs" company="HumbleBets">
 //     Copyright (c) HumbleBets. All rights reserved.
 // </copyright>
@@ -13,8 +13,11 @@ namespace BookmakerIntegration.Presentation.WebAPI.Services.DataCollector
     using System.Threading.Tasks;
     using BookmakerIntegration.Domain.DataModels.Betano;
     using BookmakerIntegration.Domain.DataModels.Betclic;
+    using BookmakerIntegration.Domain.DataModels.Placard.Request;
+    using BookmakerIntegration.Domain.DataModels.Placard.Response;
     using BookmakerIntegration.Infrastructure.Gateway.WebGateway;
     using HtmlAgilityPack;
+    using Newtonsoft.Json;
 
     /// <summary>
     /// <see cref="DataCollector"/>
@@ -44,7 +47,7 @@ namespace BookmakerIntegration.Presentation.WebAPI.Services.DataCollector
         /// <returns></returns>
         public async Task<BetanoJsonDataModel> CollectBetanoDataAsync(string url, CancellationToken cancellationToken)
         {
-            string data = await GetDataAsync(url, cancellationToken);
+            string data = await this.webGateway.GetBetanoDataAsync(url, cancellationToken);
 
             HtmlDocument page = new();
 
@@ -61,7 +64,7 @@ namespace BookmakerIntegration.Presentation.WebAPI.Services.DataCollector
         /// <returns></returns>
         public async Task<BetclicCompetitionDataModel> CollectBetclicDataAsync(string url, CancellationToken cancellationToken)
         {
-            string data = await GetDataAsync(url, cancellationToken);
+            string data = await this.webGateway.GetBetclicDataAsync(url, cancellationToken);
 
             HtmlDocument page = new();
 
@@ -73,24 +76,21 @@ namespace BookmakerIntegration.Presentation.WebAPI.Services.DataCollector
         }
 
         /// <summary>
-        /// Gets the data asynchronous.
+        /// Collects the placard data asynchronous.
         /// </summary>
         /// <param name="url">The URL.</param>
+        /// <param name="body">The body.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns></returns>
-        private static async Task<string> GetDataAsync(string url, CancellationToken cancellationToken)
+        public async Task<PlacardResponseModel> CollectPlacardDataAsync(string url, PlacardRequestModel body, CancellationToken cancellationToken)
         {
-            RestClient client = new(url);
+            string data = await this.webGateway.GetPlacardDataAsync(url, JsonConvert.SerializeObject(body), cancellationToken);
 
-            RestRequest request = new(url, Method.Get);
+            HtmlDocument page = new();
 
-            //TODO: CHANGE THIS TO WORK ON MULTI BOOKMAKERS;
-            request.AddHeader(BetclicConstantCollection.RequestPostmanTokenHeader.Name, BetclicConstantCollection.RequestPostmanTokenHeader.Value);
-            request.AddHeader(BetclicConstantCollection.RequestCacheControlHeader.Name, BetclicConstantCollection.RequestCacheControlHeader.Value);
+            page.LoadHtml(data);
 
-            RestResponse response = await client.ExecuteAsync(request, cancellationToken);
-
-            return response.Content;
+            return JsonConvert.DeserializeObject<PlacardResponseModel>(page.DocumentNode.InnerHtml);
         }
     }
 }
