@@ -1,0 +1,14 @@
+{
+	"versionInfo": {
+		"moduleVersion": "xZ7ndd+e16MkGvtoGztwxA",
+		"apiVersion": "+CXbYZ1y22VBdCuen25vAg"
+	},
+	"viewName": "Events.Events",
+	"screenData": {
+		"variables": {
+			"SelectedCompetitionId": "364307",
+			"SelectedDate": "2023-02-18",
+			"SelectedModalityId": "football"
+		}
+	}
+}
