@@ -1,40 +1,37 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="BetclicOddDataModel.cs" company="HumbleBets">
+// <copyright file="PlacardConstant.cs" company="HumbleBets">
 //     Copyright (c) HumbleBets. All rights reserved.
 // </copyright>
 // <summary>
-// BetclicOddDataModel
+// PlacardConstant
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace BookmakerIntegration.Presentation.WebAPI.DataModels.Betclic.ConstantCollection
+namespace BookmakerIntegration.Domain.ConstantCollections.Placard
 {
+    using BookmakerIntegration.Domain.Utils;
+
     /// <summary>
-    /// <see cref="BetclicConstant"/>
+    /// <see cref="PlacardConstant"/>
     /// </summary>
-    public class BetclicConstant
+    /// <seealso cref="ConstantObject"/>
+    public class PlacardConstant : ConstantObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="BetclicConstant"/> class.
+        /// Initializes a new instance of the <see cref="PlacardConstant"/> class.
         /// </summary>
         /// <param name="name">The name.</param>
         /// <param name="value">The value.</param>
-        public BetclicConstant(string name, string value)
+        public PlacardConstant(string name, string value)
+            : base(value)
         {
             this.Name = name;
-            this.Value = value;
         }
 
         /// <summary>
-        /// Gets the name.
+        /// Gets or sets the name.
         /// </summary>
         /// <value>The name.</value>
-        public string Name { get; init; }
-
-        /// <summary>
-        /// Gets the value.
-        /// </summary>
-        /// <value>The value.</value>
-        public string Value { get; init; }
+        public string Name { get; set; }
     }
 }

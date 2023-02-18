@@ -7,8 +7,10 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace BookmakerIntegration.Presentation.WebAPI.DataModels.Betano
+namespace BookmakerIntegration.Domain.DataModels.Betano
 {
+    using System.Collections.Generic;
+
     /// <summary>
     /// <see cref="BetanoGameDataModel"/>
     /// </summary>

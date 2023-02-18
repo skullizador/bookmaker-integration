@@ -9,7 +9,7 @@
 
 namespace BookmakerIntegration.Presentation.WebAPI.Queries.Betclic.GetBetclicFootballDataQuery
 {
-    using BookmakerIntegration.Presentation.WebAPI.DataModels.Betclic;
+    using BookmakerIntegration.Domain.DataModels.Betclic;
     using MediatR;
 
     /// <summary>

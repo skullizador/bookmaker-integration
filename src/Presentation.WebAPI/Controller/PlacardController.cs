@@ -1,31 +1,31 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="BetanoController.cs" company="HumbleBets">
+// <copyright file="PlacardController.cs" company="HumbleBets">
 //     Copyright (c) HumbleBets. All rights reserved.
 // </copyright>
 // <summary>
-// BetanoController
+// PlacardController
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace BookmakerIntegration.Domain.Controller
+namespace BookmakerIntegration.Presentation.WebAPI.Controller
 {
     using System.Net;
     using AutoMapper;
-    using BookmakerIntegration.Domain.DataModels.Betano;
+    using BookmakerIntegration.Domain.DataModels.Placard.Response;
     using BookmakerIntegration.Presentation.WebAPI.Dtos.Input.Bookmaker;
-    using BookmakerIntegration.Presentation.WebAPI.Dtos.Output.Betano;
-    using BookmakerIntegration.Presentation.WebAPI.Queries.Betano.GetBetanoFootballDataQuery;
+    using BookmakerIntegration.Presentation.WebAPI.Dtos.Input.Placard;
+    using BookmakerIntegration.Presentation.WebAPI.Queries.Placard.GetPlacardFootbalDataQuery;
     using BookmakerIntegration.Presentation.WebAPI.Utils;
     using MediatR;
     using Microsoft.AspNetCore.Mvc;
 
     /// <summary>
-    /// <see cref="BetanoController"/>
+    /// <see cref="PlacardController"/>
     /// </summary>
     /// <seealso cref="Controller"/>
+    [Route("api/v1/Placard")]
     [ApiController]
-    [Route("api/v1/Betano")]
-    public class BetanoController : Controller
+    public class PlacardController : Controller
     {
         /// <summary>
         /// The mapper
@@ -38,13 +38,11 @@ namespace BookmakerIntegration.Domain.Controller
         private readonly IMediator mediator;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="BetanoController"/> class.
+        /// Initializes a new instance of the <see cref="PlacardController"/> class.
         /// </summary>
         /// <param name="mapper">The mapper.</param>
         /// <param name="mediator">The mediator.</param>
-        public BetanoController(
-            IMapper mapper,
-            IMediator mediator)
+        public PlacardController(IMapper mapper, IMediator mediator)
         {
             this.mapper = mapper;
             this.mediator = mediator;
@@ -53,23 +51,29 @@ namespace BookmakerIntegration.Domain.Controller
         /// <summary>
         /// Gets the football competition data asynchronous.
         /// </summary>
+        /// <param name="filter">The filter.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns></returns>
         [HttpGet]
         [Route("Football/{CompetitionId}")]
-        [ProducesResponseType(typeof(BetanoBlockDto), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(PlacardResponseModel), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(ErrorMessage), (int)HttpStatusCode.NotFound)]
         [ProducesResponseType(typeof(ErrorMessage), (int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> GetFootballCompetitionDataAsync(
             [FromRoute] GetBookmakerDataByCompetitionIdDto filter,
+            [FromQuery] PlacardRequestVariablesDto query,
             CancellationToken cancellationToken)
         {
-            List<BetanoBlocksDataModel> blocks = await this.mediator.Send(new GetBetanoFootballDataQuery
+            PlacardResponseModel data = await this.mediator.Send(new GetPlacardFootbalDataQuery
             {
-                CompetitionId = filter.CompetitionId
+                CompetitionId = filter.CompetitionId,
+                Date = query.Date,
+                PlacardCompetitionId = query.PlacardCompetitionId,
+                Sport = query.Sport
             }, cancellationToken);
 
-            return this.Ok(this.mapper.Map<List<BetanoBlockDto>>(blocks));
+            //TODO: EXPOSE DATA;
+            return this.Ok(data);
         }
     }
 }

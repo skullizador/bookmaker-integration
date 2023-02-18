@@ -12,7 +12,7 @@ namespace BookmakerIntegration.Presentation.WebAPI.Queries.Betclic.GetBetclicFoo
     using System.Threading;
     using System.Threading.Tasks;
     using BookmakerIntegration.Domain.AggregateModels.Bookmaker.Repository;
-    using BookmakerIntegration.Presentation.WebAPI.DataModels.Betclic;
+    using BookmakerIntegration.Domain.DataModels.Betclic;
     using BookmakerIntegration.Presentation.WebAPI.Services.DataCollector;
     using MediatR;
 

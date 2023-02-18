@@ -1,24 +1,24 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="BetanoConstant.cs" company="HumbleBets">
+// <copyright file="ConstantObject.cs" company="HumbleBets">
 //     Copyright (c) HumbleBets. All rights reserved.
 // </copyright>
 // <summary>
-// BetanoConstant
+// ConstantObject
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace BookmakerIntegration.Presentation.WebAPI.DataModels.Betano.ConstantCollection
+namespace BookmakerIntegration.Domain.Utils
 {
     /// <summary>
-    /// <see cref="BetanoConstant"/>
+    /// <see cref="ConstantObject"/>
     /// </summary>
-    public class BetanoConstant
+    public abstract class ConstantObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="BetanoConstant"/> class.
+        /// Initializes a new instance of the <see cref="ConstantObject"/> class.
         /// </summary>
         /// <param name="value">The value.</param>
-        public BetanoConstant(string value)
+        protected ConstantObject(string value)
         {
             this.Value = value;
         }

@@ -12,7 +12,7 @@ namespace BookmakerIntegration.Presentation.WebAPI.Queries.Betano.GetBetanoFootb
     using System.Threading;
     using System.Threading.Tasks;
     using BookmakerIntegration.Domain.AggregateModels.Bookmaker.Repository;
-    using BookmakerIntegration.Presentation.WebAPI.DataModels.Betano;
+    using BookmakerIntegration.Domain.DataModels.Betano;
     using BookmakerIntegration.Presentation.WebAPI.Services.DataCollector;
     using MediatR;
 

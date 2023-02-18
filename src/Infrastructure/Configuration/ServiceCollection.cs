@@ -10,6 +10,7 @@
 namespace BookmakerIntegration.Infrastructure.Configuration
 {
     using BookmakerIntegration.Domain.AggregateModels.Bookmaker.Repository;
+    using BookmakerIntegration.Infrastructure.Gateway.WebGateway;
     using BookmakerIntegration.Infrastructure.Repository;
     using Microsoft.Extensions.DependencyInjection;
 
@@ -29,6 +30,8 @@ namespace BookmakerIntegration.Infrastructure.Configuration
             services.AddScoped<ISportsRepository, SportsRepository>();
 
             services.AddScoped<ICompetitionRepository, CompetitionRepository>();
+
+            services.AddScoped<IWebGateway, WebGateway>();
         }
     }
 }

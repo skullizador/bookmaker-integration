@@ -11,7 +11,7 @@ namespace BookmakerIntegration.Presentation.WebAPI.Controller
 {
     using System.Net;
     using AutoMapper;
-    using BookmakerIntegration.Presentation.WebAPI.DataModels.Betclic;
+    using BookmakerIntegration.Domain.DataModels.Betclic;
     using BookmakerIntegration.Presentation.WebAPI.Dtos.Input.Bookmaker;
     using BookmakerIntegration.Presentation.WebAPI.Dtos.Output.Betclic;
     using BookmakerIntegration.Presentation.WebAPI.Queries.Betclic.GetBetclicFootballDataQuery;
