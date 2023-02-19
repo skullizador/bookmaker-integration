@@ -92,5 +92,16 @@ namespace BookmakerIntegration.Presentation.WebAPI.Services.DataCollector
 
             return JsonConvert.DeserializeObject<PlacardResponseModel>(page.DocumentNode.InnerHtml);
         }
+
+        public async Task<string> CollectSolVerdeDataAsync(string url, CancellationToken cancellationToken)
+        {
+            string data = await this.webGateway.GetSolVerdeDataAsync(url, cancellationToken);
+
+            HtmlDocument page = new();
+
+            page.LoadHtml(data);
+
+            return page.DocumentNode.InnerHtml;
+        }
     }
 }

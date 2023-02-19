@@ -41,5 +41,7 @@ namespace BookmakerIntegration.Infrastructure.Gateway.WebGateway
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns></returns>
         Task<string> GetPlacardDataAsync(string url, string body, CancellationToken cancellationToken);
+
+        Task<string> GetSolVerdeDataAsync(string url, CancellationToken cancellationToken);
     }
 }

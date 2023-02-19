@@ -43,5 +43,7 @@ namespace BookmakerIntegration.Presentation.WebAPI.Services.DataCollector
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns></returns>
         Task<PlacardResponseModel> CollectPlacardDataAsync(string url, PlacardRequestModel body, CancellationToken cancellationToken);
+
+        Task<string> CollectSolVerdeDataAsync(string url, CancellationToken cancellationToken);
     }
 }

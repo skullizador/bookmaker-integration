@@ -79,5 +79,21 @@ namespace BookmakerIntegration.Infrastructure.Gateway.WebGateway
 
             return response.Content;
         }
+
+        public async Task<string> GetSolVerdeDataAsync(string url, CancellationToken cancellationToken)
+        {
+            //var th = new Thread(() =>
+            //{
+            //    WebBrowser web = new(),
+
+            //})
+
+            //web.ScrollBarsEnabled = false;
+            //web.ScriptErrorsSuppressed = true;
+            //web.Navigate(url);
+            //while (web.ReadyState != WebBrowserReadyState.Complete) { Application.DoEvents(); }
+
+            return await Task.FromResult(string.Empty);
+        }
     }
 }
