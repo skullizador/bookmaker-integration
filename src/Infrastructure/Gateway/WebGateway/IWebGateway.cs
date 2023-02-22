@@ -42,6 +42,12 @@ namespace BookmakerIntegration.Infrastructure.Gateway.WebGateway
         /// <returns></returns>
         Task<string> GetPlacardDataAsync(string url, string body, CancellationToken cancellationToken);
 
+        /// <summary>
+        /// Gets the sol verde data asynchronous.
+        /// </summary>
+        /// <param name="url">The URL.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns></returns>
         Task<string> GetSolVerdeDataAsync(string url, CancellationToken cancellationToken);
     }
 }

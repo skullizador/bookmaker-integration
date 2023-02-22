@@ -82,18 +82,15 @@ namespace BookmakerIntegration.Infrastructure.Gateway.WebGateway
 
         public async Task<string> GetSolVerdeDataAsync(string url, CancellationToken cancellationToken)
         {
-            //var th = new Thread(() =>
-            //{
-            //    WebBrowser web = new(),
+            RestClient restClient = new(url);
 
-            //})
+            RestRequest request = new RestRequest(url, Method.Get);
 
-            //web.ScrollBarsEnabled = false;
-            //web.ScriptErrorsSuppressed = true;
-            //web.Navigate(url);
-            //while (web.ReadyState != WebBrowserReadyState.Complete) { Application.DoEvents(); }
+            //TODO: Add headers and body
 
-            return await Task.FromResult(string.Empty);
+            RestResponse response = await restClient.ExecuteAsync(request, cancellationToken);
+
+            return response.Content;
         }
     }
 }
