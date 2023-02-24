@@ -34,6 +34,14 @@ namespace BookmakerIntegration.Infrastructure.Gateway.WebGateway
         Task<string> GetBetclicDataAsync(string url, CancellationToken cancellationToken);
 
         /// <summary>
+        /// Gets the bwin data asynchronous.
+        /// </summary>
+        /// <param name="url">The URL.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns></returns>
+        Task<string> GetBwinDataAsync(string url, CancellationToken cancellationToken);
+
+        /// <summary>
         /// Gets the placard data asynchronous.
         /// </summary>
         /// <param name="url">The URL.</param>
