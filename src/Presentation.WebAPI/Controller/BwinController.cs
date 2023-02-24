@@ -11,6 +11,7 @@ namespace BookmakerIntegration.Presentation.WebAPI.Controller
 {
     using System.Net;
     using AutoMapper;
+    using BookmakerIntegration.Domain.ConstantCollections.Bwin;
     using BookmakerIntegration.Domain.DataModels.Bwin;
     using BookmakerIntegration.Presentation.WebAPI.Dtos.Input.Bookmaker;
     using BookmakerIntegration.Presentation.WebAPI.Dtos.Output.Bookmaker;
@@ -71,8 +72,9 @@ namespace BookmakerIntegration.Presentation.WebAPI.Controller
                 CompetitionId = filter.CompetitionId,
             }, cancellationToken);
 
-            //TODO: FIX BOOKMAKERID AND LEAGUE;
-            return this.Ok(data.MapToCompetitionDto(Guid.Empty, ""));
+            Guid bookmakerId = Guid.Parse(BwinConstantCollection.BookmakerId.Value);
+
+            return this.Ok(data.MapToCompetitionDto(bookmakerId, BwinConstantCollection.CurrentFootballLeague.Value));
         }
     }
 }

@@ -11,6 +11,7 @@ namespace BookmakerIntegration.Presentation.WebAPI.Controller
 {
     using System.Net;
     using AutoMapper;
+    using BookmakerIntegration.Domain.ConstantCollections.Placard;
     using BookmakerIntegration.Domain.DataModels.Placard.Response;
     using BookmakerIntegration.Presentation.WebAPI.Dtos.Input.Bookmaker;
     using BookmakerIntegration.Presentation.WebAPI.Dtos.Input.Placard;
@@ -74,8 +75,12 @@ namespace BookmakerIntegration.Presentation.WebAPI.Controller
                 Sport = query.Sport
             }, cancellationToken);
 
-            //TODO: FIX BOOKMAKERID, LEAGUE AND REGION;
-            return this.Ok(data.Data.MapToCompetitionDto(Guid.Empty, "", ""));
+            Guid bookmakerId = Guid.Parse(PlacardConstantCollection.BookmakerId.Value);
+
+            return this.Ok(data.Data.MapToCompetitionDto(
+                bookmakerId,
+               PlacardConstantCollection.CurrentFootballLeague.Value,
+               PlacardConstantCollection.CurrentFootballLeagueRegion.Value));
         }
     }
 }

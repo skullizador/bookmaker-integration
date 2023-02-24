@@ -21,6 +21,24 @@ namespace BookmakerIntegration.Domain.ConstantCollections.Placard
         public static PlacardConstant ApiVersion => new("apiVersion", "+CXbYZ1y22VBdCuen25vAg");
 
         /// <summary>
+        /// Gets the bookmaker identifier.
+        /// </summary>
+        /// <value>The bookmaker identifier.</value>
+        public static PlacardConstant BookmakerId => new(null, string.Empty);
+
+        /// <summary>
+        /// Gets the current football league.
+        /// </summary>
+        /// <value>The current football league.</value>
+        public static PlacardConstant CurrentFootballLeague => new(null, "Primeira Liga");
+
+        /// <summary>
+        /// Gets the current football league region.
+        /// </summary>
+        /// <value>The current football league region.</value>
+        public static PlacardConstant CurrentFootballLeagueRegion => new(null, "Portugal");
+
+        /// <summary>
         /// Gets the module version.
         /// </summary>
         /// <value>The module version.</value>

@@ -15,10 +15,23 @@ namespace BookmakerIntegration.Domain.ConstantCollections.Bwin
     public static class BwinConstantCollection
     {
         /// <summary>
+        /// Gets the bookmaker identifier.
+        /// </summary>
+        /// <value>The bookmaker identifier.</value>
+        //TODO: ADD REAL BOOKMAKERID
+        public static BwinConstant BookmakerId => new(null, string.Empty);
+
+        /// <summary>
         /// Gets the cookie header.
         /// </summary>
         /// <value>The cookie header.</value>
         public static BwinConstant CookieHeader => new("Cookie", "__cf_bm=Y564oOLsDdfSuhro9Lnwh6_QjXru1t_Xunw9SKiByKc-1677104004-0-AUMO1IIhRNEDHngVRGzYt3AFazFxNm18UiFyMDTZAbyT6x3zXS2JnSWNMrLo5lHluBRFBbTr/EmOYnJUncjvw38=");
+
+        /// <summary>
+        /// Gets the current football league.
+        /// </summary>
+        /// <value>The current football league.</value>
+        public static BwinConstant CurrentFootballLeague => new(null, "Primeira Liga Bwin");
 
         /// <summary>
         /// Gets the current wanted odds.

@@ -24,5 +24,12 @@ namespace BookmakerIntegration.Domain.ConstantCollections.Betano
         /// The betano current wanted odds
         /// </summary>
         public static BetanoConstant BetanoCurrentWantedOdds => new("Resultado Final");
+
+        /// <summary>
+        /// Gets the betano bookmaker identifier.
+        /// </summary>
+        /// <value>The betano bookmaker identifier.</value>
+        //TODO: ADD REAL BOOKMAKERID;
+        public static BetanoConstant BookmakerId => new(string.Empty);
     }
 }

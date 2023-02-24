@@ -10,7 +10,7 @@
 namespace BookmakerIntegration.Domain.Controller
 {
     using System.Net;
-    using AutoMapper;
+    using BookmakerIntegration.Domain.ConstantCollections.Betano;
     using BookmakerIntegration.Domain.DataModels.Betano;
     using BookmakerIntegration.Presentation.WebAPI.Dtos.Input.Bookmaker;
     using BookmakerIntegration.Presentation.WebAPI.Dtos.Output.Bookmaker;
@@ -29,11 +29,6 @@ namespace BookmakerIntegration.Domain.Controller
     public class BetanoController : Controller
     {
         /// <summary>
-        /// The mapper
-        /// </summary>
-        private readonly IMapper mapper;
-
-        /// <summary>
         /// The mediator
         /// </summary>
         private readonly IMediator mediator;
@@ -44,10 +39,8 @@ namespace BookmakerIntegration.Domain.Controller
         /// <param name="mapper">The mapper.</param>
         /// <param name="mediator">The mediator.</param>
         public BetanoController(
-            IMapper mapper,
             IMediator mediator)
         {
-            this.mapper = mapper;
             this.mediator = mediator;
         }
 
@@ -70,7 +63,7 @@ namespace BookmakerIntegration.Domain.Controller
                 CompetitionId = filter.CompetitionId
             }, cancellationToken);
 
-            return this.Ok(this.ConvertToCompetitionDto(blocks));
+            return this.Ok(ConvertToCompetitionDto(blocks));
         }
 
         /// <summary>
@@ -78,14 +71,15 @@ namespace BookmakerIntegration.Domain.Controller
         /// </summary>
         /// <param name="blocks">The blocks.</param>
         /// <returns></returns>
-        private List<CompetitionDto> ConvertToCompetitionDto(List<BetanoBlocksDataModel> blocks)
+        private static List<CompetitionDto> ConvertToCompetitionDto(List<BetanoBlocksDataModel> blocks)
         {
             List<CompetitionDto> competitions = new();
 
+            Guid bookmakerId = Guid.Parse(BetanoConstantCollection.BookmakerId.Value);
+
             foreach (BetanoBlocksDataModel block in blocks)
             {
-                //TODO:FIX BOOKMAKERID;
-                competitions.Add(block.MapToCompetitionDto(Guid.Empty));
+                competitions.Add(block.MapToCompetitionDto(bookmakerId));
             }
 
             return competitions;

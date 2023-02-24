@@ -10,7 +10,7 @@
 namespace BookmakerIntegration.Presentation.WebAPI.Controller
 {
     using System.Net;
-    using AutoMapper;
+    using BookmakerIntegration.Domain.ConstantCollections.Betclic;
     using BookmakerIntegration.Domain.DataModels.Betclic;
     using BookmakerIntegration.Presentation.WebAPI.Dtos.Input.Bookmaker;
     using BookmakerIntegration.Presentation.WebAPI.Dtos.Output.Bookmaker;
@@ -29,11 +29,6 @@ namespace BookmakerIntegration.Presentation.WebAPI.Controller
     public class BetclicController : Controller
     {
         /// <summary>
-        /// The mapper
-        /// </summary>
-        private readonly IMapper mapper;
-
-        /// <summary>
         /// The mediator
         /// </summary>
         private readonly IMediator mediator;
@@ -44,10 +39,8 @@ namespace BookmakerIntegration.Presentation.WebAPI.Controller
         /// <param name="mapper">The mapper.</param>
         /// <param name="mediator">The mediator.</param>
         public BetclicController(
-            IMapper mapper,
             IMediator mediator)
         {
-            this.mapper = mapper;
             this.mediator = mediator;
         }
 
@@ -71,8 +64,9 @@ namespace BookmakerIntegration.Presentation.WebAPI.Controller
                 CompetitionId = filter.CompetitionId
             }, cancellationToken);
 
-            //TODO: FIX BOOKMAKERID;
-            return this.Ok(competition.MapToCompetitionDto(Guid.Empty));
+            Guid bookmakerId = Guid.Parse(BetclicConstantCollection.BookmakerId.Value);
+
+            return this.Ok(competition.MapToCompetitionDto(bookmakerId));
         }
     }
 }
