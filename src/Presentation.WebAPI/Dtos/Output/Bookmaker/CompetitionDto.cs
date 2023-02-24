@@ -1,27 +1,27 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="BetanoBlockDto.cs" company="HumbleBets">
+// <copyright file="CompetitionDto.cs" company="HumbleBets">
 //     Copyright (c) HumbleBets. All rights reserved.
 // </copyright>
 // <summary>
-// BetanoBlockDto
+// CompetitionDto
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace BookmakerIntegration.Presentation.WebAPI.Dtos.Output.Betano
+namespace BookmakerIntegration.Presentation.WebAPI.Dtos.Output.Bookmaker
 {
     /// <summary>
-    /// <see cref="BetanoBlockDto"/>
+    /// <see cref="CompetitionDto"/>
     /// </summary>
-    public class BetanoBlockDto
+    public class CompetitionDto
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="BetanoBlockDto"/> class.
+        /// Initializes a new instance of the <see cref="CompetitionDto"/> class.
         /// </summary>
-        public BetanoBlockDto()
+        public CompetitionDto()
         {
             this.League = string.Empty;
             this.Region = string.Empty;
-            this.Games = new List<BetanoGameDto>();
+            this.Games = new List<GameDto>();
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace BookmakerIntegration.Presentation.WebAPI.Dtos.Output.Betano
         /// Gets the games.
         /// </summary>
         /// <value>The games.</value>
-        public List<BetanoGameDto> Games { get; init; }
+        public List<GameDto> Games { get; init; }
 
         /// <summary>
         /// Gets the league.
