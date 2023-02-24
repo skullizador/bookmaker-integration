@@ -14,6 +14,8 @@ namespace BookmakerIntegration.Presentation.WebAPI.Controller
     using BookmakerIntegration.Domain.DataModels.Placard.Response;
     using BookmakerIntegration.Presentation.WebAPI.Dtos.Input.Bookmaker;
     using BookmakerIntegration.Presentation.WebAPI.Dtos.Input.Placard;
+    using BookmakerIntegration.Presentation.WebAPI.Dtos.Output.Bookmaker;
+    using BookmakerIntegration.Presentation.WebAPI.Mappers.Placard;
     using BookmakerIntegration.Presentation.WebAPI.Queries.Placard.GetPlacardFootbalDataQuery;
     using BookmakerIntegration.Presentation.WebAPI.Utils;
     using MediatR;
@@ -56,7 +58,7 @@ namespace BookmakerIntegration.Presentation.WebAPI.Controller
         /// <returns></returns>
         [HttpGet]
         [Route("Football/{CompetitionId}")]
-        [ProducesResponseType(typeof(PlacardResponseModel), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(CompetitionDto), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(ErrorMessage), (int)HttpStatusCode.NotFound)]
         [ProducesResponseType(typeof(ErrorMessage), (int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> GetFootballCompetitionDataAsync(
@@ -72,8 +74,8 @@ namespace BookmakerIntegration.Presentation.WebAPI.Controller
                 Sport = query.Sport
             }, cancellationToken);
 
-            //TODO: EXPOSE DATA;
-            return this.Ok(data);
+            //TODO: FIX BOOKMAKERID, LEAGUE AND REGION;
+            return this.Ok(data.Data.MapToCompetitionDto(Guid.Empty, "", ""));
         }
     }
 }

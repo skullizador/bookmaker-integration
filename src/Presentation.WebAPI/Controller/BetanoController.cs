@@ -13,7 +13,8 @@ namespace BookmakerIntegration.Domain.Controller
     using AutoMapper;
     using BookmakerIntegration.Domain.DataModels.Betano;
     using BookmakerIntegration.Presentation.WebAPI.Dtos.Input.Bookmaker;
-    using BookmakerIntegration.Presentation.WebAPI.Dtos.Output.Betano;
+    using BookmakerIntegration.Presentation.WebAPI.Dtos.Output.Bookmaker;
+    using BookmakerIntegration.Presentation.WebAPI.Mappers.Betano;
     using BookmakerIntegration.Presentation.WebAPI.Queries.Betano.GetBetanoFootballDataQuery;
     using BookmakerIntegration.Presentation.WebAPI.Utils;
     using MediatR;
@@ -57,7 +58,7 @@ namespace BookmakerIntegration.Domain.Controller
         /// <returns></returns>
         [HttpGet]
         [Route("Football/{CompetitionId}")]
-        [ProducesResponseType(typeof(BetanoBlockDto), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(CompetitionDto), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(ErrorMessage), (int)HttpStatusCode.NotFound)]
         [ProducesResponseType(typeof(ErrorMessage), (int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> GetFootballCompetitionDataAsync(
@@ -69,7 +70,25 @@ namespace BookmakerIntegration.Domain.Controller
                 CompetitionId = filter.CompetitionId
             }, cancellationToken);
 
-            return this.Ok(this.mapper.Map<List<BetanoBlockDto>>(blocks));
+            return this.Ok(this.ConvertToCompetitionDto(blocks));
+        }
+
+        /// <summary>
+        /// Converts to competition dto.
+        /// </summary>
+        /// <param name="blocks">The blocks.</param>
+        /// <returns></returns>
+        private List<CompetitionDto> ConvertToCompetitionDto(List<BetanoBlocksDataModel> blocks)
+        {
+            List<CompetitionDto> competitions = new();
+
+            foreach (BetanoBlocksDataModel block in blocks)
+            {
+                //TODO:FIX BOOKMAKERID;
+                competitions.Add(block.MapToCompetitionDto(Guid.Empty));
+            }
+
+            return competitions;
         }
     }
 }

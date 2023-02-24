@@ -13,7 +13,8 @@ namespace BookmakerIntegration.Presentation.WebAPI.Controller
     using AutoMapper;
     using BookmakerIntegration.Domain.DataModels.Betclic;
     using BookmakerIntegration.Presentation.WebAPI.Dtos.Input.Bookmaker;
-    using BookmakerIntegration.Presentation.WebAPI.Dtos.Output.Betclic;
+    using BookmakerIntegration.Presentation.WebAPI.Dtos.Output.Bookmaker;
+    using BookmakerIntegration.Presentation.WebAPI.Mappers.Betclic;
     using BookmakerIntegration.Presentation.WebAPI.Queries.Betclic.GetBetclicFootballDataQuery;
     using BookmakerIntegration.Presentation.WebAPI.Utils;
     using MediatR;
@@ -58,19 +59,20 @@ namespace BookmakerIntegration.Presentation.WebAPI.Controller
         /// <returns></returns>
         [HttpGet]
         [Route("Football/{CompetitionId}")]
-        [ProducesResponseType(typeof(BetclicCompetitionDto), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(CompetitionDto), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(ErrorMessage), (int)HttpStatusCode.NotFound)]
         [ProducesResponseType(typeof(ErrorMessage), (int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> GetFootballCompetitionDataAsync(
             [FromRoute] GetBookmakerDataByCompetitionIdDto filter,
             CancellationToken cancellationToken)
         {
-            BetclicCompetitionDataModel competitionData = await this.mediator.Send(new GetBetclicFootballDataQuery
+            BetclicCompetitionDataModel competition = await this.mediator.Send(new GetBetclicFootballDataQuery
             {
                 CompetitionId = filter.CompetitionId
             }, cancellationToken);
 
-            return this.Ok(this.mapper.Map<BetclicCompetitionDto>(competitionData));
+            //TODO: FIX BOOKMAKERID;
+            return this.Ok(competition.MapToCompetitionDto(Guid.Empty));
         }
     }
 }
