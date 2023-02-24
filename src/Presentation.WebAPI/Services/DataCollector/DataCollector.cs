@@ -13,6 +13,7 @@ namespace BookmakerIntegration.Presentation.WebAPI.Services.DataCollector
     using System.Threading.Tasks;
     using BookmakerIntegration.Domain.DataModels.Betano;
     using BookmakerIntegration.Domain.DataModels.Betclic;
+    using BookmakerIntegration.Domain.DataModels.Bwin;
     using BookmakerIntegration.Domain.DataModels.Placard.Request;
     using BookmakerIntegration.Domain.DataModels.Placard.Response;
     using BookmakerIntegration.Infrastructure.Gateway.WebGateway;
@@ -73,6 +74,23 @@ namespace BookmakerIntegration.Presentation.WebAPI.Services.DataCollector
             BetclicCompetitionDataModel competition = BetclicCompetitionDataModel.DecodeHtml(page);
 
             return competition;
+        }
+
+        /// <summary>
+        /// Collects the bwin data asynchronous.
+        /// </summary>
+        /// <param name="url">The URL.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns></returns>
+        public async Task<BwinJsonDataModel> CollectBwinDataAsync(string url, CancellationToken cancellationToken)
+        {
+            string data = await this.webGateway.GetBwinDataAsync(url, cancellationToken);
+
+            HtmlDocument page = new();
+
+            page.LoadHtml(data);
+
+            return JsonConvert.DeserializeObject<BwinJsonDataModel>(page.DocumentNode.InnerHtml);
         }
 
         /// <summary>

@@ -11,6 +11,7 @@ namespace BookmakerIntegration.Presentation.WebAPI.Services.DataCollector
 {
     using BookmakerIntegration.Domain.DataModels.Betano;
     using BookmakerIntegration.Domain.DataModels.Betclic;
+    using BookmakerIntegration.Domain.DataModels.Bwin;
     using BookmakerIntegration.Domain.DataModels.Placard.Request;
     using BookmakerIntegration.Domain.DataModels.Placard.Response;
 
@@ -34,6 +35,14 @@ namespace BookmakerIntegration.Presentation.WebAPI.Services.DataCollector
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns></returns>
         Task<BetclicCompetitionDataModel> CollectBetclicDataAsync(string url, CancellationToken cancellationToken);
+
+        /// <summary>
+        /// Collects the bwin data asynchronous.
+        /// </summary>
+        /// <param name="url">The URL.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns></returns>
+        Task<BwinJsonDataModel> CollectBwinDataAsync(string url, CancellationToken cancellationToken);
 
         /// <summary>
         /// Collects the placard data asynchronous.
