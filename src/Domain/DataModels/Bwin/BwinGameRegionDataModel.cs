@@ -1,27 +1,23 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="MapperProfile.cs" company="HumbleBets">
+// <copyright file="BwinGameRegionDataModel.cs" company="HumbleBets">
 //     Copyright (c) HumbleBets. All rights reserved.
 // </copyright>
 // <summary>
-// MapperProfile
+// BwinGameRegionDataModel
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace BookmakerIntegration.Presentation.WebAPI.Mappers
+namespace BookmakerIntegration.Domain.DataModels.Bwin
 {
-    using AutoMapper;
-
     /// <summary>
-    /// <see cref="MapperProfile"/>
+    /// <see cref="BwinGameRegionDataModel"/>
     /// </summary>
-    /// <seealso cref="Profile"/>
-    public class MapperProfile : Profile
+    public class BwinGameRegionDataModel
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="MapperProfile"/> class.
+        /// Gets the name.
         /// </summary>
-        public MapperProfile()
-        {
-        }
+        /// <value>The name.</value>
+        public BwinNameDataModel name { get; init; }
     }
 }

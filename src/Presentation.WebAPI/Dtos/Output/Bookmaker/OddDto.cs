@@ -1,23 +1,23 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="BetclicOddDto.cs" company="HumbleBets">
+// <copyright file="OddDto.cs" company="HumbleBets">
 //     Copyright (c) HumbleBets. All rights reserved.
 // </copyright>
 // <summary>
-// BetclicOddDto
+// OddDto
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace BookmakerIntegration.Presentation.WebAPI.Dtos.Output.Betclic
+namespace BookmakerIntegration.Presentation.WebAPI.Dtos.Output.Bookmaker
 {
     /// <summary>
-    /// <see cref="BetclicOddDto"/>
+    /// <see cref="OddDto"/>
     /// </summary>
-    public class BetclicOddDto
+    public class OddDto
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="BetclicOddDto"/> class.
+        /// Initializes a new instance of the <see cref="OddDto"/> class.
         /// </summary>
-        public BetclicOddDto()
+        public OddDto()
         {
             this.TeamName = string.Empty;
         }

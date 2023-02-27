@@ -15,6 +15,13 @@ namespace BookmakerIntegration.Domain.ConstantCollections.Betclic
     public static class BetclicConstantCollection
     {
         /// <summary>
+        /// Gets the bookmaker identifier.
+        /// </summary>
+        /// <value>The bookmaker identifier.</value>
+        //TODO: ADD REAL BOOKMAKERID;
+        public static BetclicConstant BookmakerId => new(null, string.Empty);
+
+        /// <summary>
         /// Gets the competition header x path.
         /// </summary>
         /// <value>The competition header x path.</value>

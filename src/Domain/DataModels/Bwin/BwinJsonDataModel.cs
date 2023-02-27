@@ -1,27 +1,25 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="MapperProfile.cs" company="HumbleBets">
+// <copyright file="BwinJsonDataModel.cs" company="HumbleBets">
 //     Copyright (c) HumbleBets. All rights reserved.
 // </copyright>
 // <summary>
-// MapperProfile
+// BwinJsonDataModel
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace BookmakerIntegration.Presentation.WebAPI.Mappers
+namespace BookmakerIntegration.Domain.DataModels.Bwin
 {
-    using AutoMapper;
+    using System.Collections.Generic;
 
     /// <summary>
-    /// <see cref="MapperProfile"/>
+    /// <see cref="BwinJsonDataModel"/>
     /// </summary>
-    /// <seealso cref="Profile"/>
-    public class MapperProfile : Profile
+    public class BwinJsonDataModel
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="MapperProfile"/> class.
+        /// Gets the widgets.
         /// </summary>
-        public MapperProfile()
-        {
-        }
+        /// <value>The widgets.</value>
+        public List<BwinWidgetDataModel> widgets { get; init; }
     }
 }

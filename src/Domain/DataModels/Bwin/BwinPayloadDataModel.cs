@@ -1,27 +1,25 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="MapperProfile.cs" company="HumbleBets">
+// <copyright file="BwinPayloadDataModel.cs" company="HumbleBets">
 //     Copyright (c) HumbleBets. All rights reserved.
 // </copyright>
 // <summary>
-// MapperProfile
+// BwinPayloadDataModel
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace BookmakerIntegration.Presentation.WebAPI.Mappers
+namespace BookmakerIntegration.Domain.DataModels.Bwin
 {
-    using AutoMapper;
+    using System.Collections.Generic;
 
     /// <summary>
-    /// <see cref="MapperProfile"/>
+    /// <see cref="BwinPayloadDataModel"/>
     /// </summary>
-    /// <seealso cref="Profile"/>
-    public class MapperProfile : Profile
+    public class BwinPayloadDataModel
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="MapperProfile"/> class.
+        /// Gets the fixtures.
         /// </summary>
-        public MapperProfile()
-        {
-        }
+        /// <value>The fixtures.</value>
+        public List<BwinGameDataModel> fixtures { get; init; }
     }
 }

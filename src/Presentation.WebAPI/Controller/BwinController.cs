@@ -1,9 +1,9 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="PlacardController.cs" company="HumbleBets">
+// <copyright file="BwinController.cs" company="HumbleBets">
 //     Copyright (c) HumbleBets. All rights reserved.
 // </copyright>
 // <summary>
-// PlacardController
+// BwinController
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -11,24 +11,23 @@ namespace BookmakerIntegration.Presentation.WebAPI.Controller
 {
     using System.Net;
     using AutoMapper;
-    using BookmakerIntegration.Domain.ConstantCollections.Placard;
-    using BookmakerIntegration.Domain.DataModels.Placard.Response;
+    using BookmakerIntegration.Domain.ConstantCollections.Bwin;
+    using BookmakerIntegration.Domain.DataModels.Bwin;
     using BookmakerIntegration.Presentation.WebAPI.Dtos.Input.Bookmaker;
-    using BookmakerIntegration.Presentation.WebAPI.Dtos.Input.Placard;
     using BookmakerIntegration.Presentation.WebAPI.Dtos.Output.Bookmaker;
-    using BookmakerIntegration.Presentation.WebAPI.Mappers.Placard;
-    using BookmakerIntegration.Presentation.WebAPI.Queries.Placard.GetPlacardFootbalDataQuery;
+    using BookmakerIntegration.Presentation.WebAPI.Mappers.Bwin;
+    using BookmakerIntegration.Presentation.WebAPI.Queries.Bwin.GetBwinFootballDataQuery;
     using BookmakerIntegration.Presentation.WebAPI.Utils;
     using MediatR;
     using Microsoft.AspNetCore.Mvc;
 
     /// <summary>
-    /// <see cref="PlacardController"/>
+    /// <see cref="BwinController"/>
     /// </summary>
     /// <seealso cref="Controller"/>
-    [Route("api/v1/Placard")]
+    [Route("api/v1/Bwin")]
     [ApiController]
-    public class PlacardController : Controller
+    public class BwinController : Controller
     {
         /// <summary>
         /// The mapper
@@ -41,11 +40,13 @@ namespace BookmakerIntegration.Presentation.WebAPI.Controller
         private readonly IMediator mediator;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PlacardController"/> class.
+        /// Initializes a new instance of the <see cref="BwinController"/> class.
         /// </summary>
         /// <param name="mapper">The mapper.</param>
         /// <param name="mediator">The mediator.</param>
-        public PlacardController(IMapper mapper, IMediator mediator)
+        public BwinController(
+            IMapper mapper,
+            IMediator mediator)
         {
             this.mapper = mapper;
             this.mediator = mediator;
@@ -64,23 +65,16 @@ namespace BookmakerIntegration.Presentation.WebAPI.Controller
         [ProducesResponseType(typeof(ErrorMessage), (int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> GetFootballCompetitionDataAsync(
             [FromRoute] GetBookmakerDataByCompetitionIdDto filter,
-            [FromQuery] PlacardRequestVariablesDto query,
             CancellationToken cancellationToken)
         {
-            PlacardResponseModel data = await this.mediator.Send(new GetPlacardFootbalDataQuery
+            BwinWidgetDataModel data = await this.mediator.Send(new GetBwinFootballDataQuery
             {
                 CompetitionId = filter.CompetitionId,
-                Date = query.Date,
-                PlacardCompetitionId = query.PlacardCompetitionId,
-                Sport = query.Sport
             }, cancellationToken);
 
-            Guid bookmakerId = Guid.Parse(PlacardConstantCollection.BookmakerId.Value);
+            Guid bookmakerId = Guid.Parse(BwinConstantCollection.BookmakerId.Value);
 
-            return this.Ok(data.Data.MapToCompetitionDto(
-                bookmakerId,
-               PlacardConstantCollection.CurrentFootballLeague.Value,
-               PlacardConstantCollection.CurrentFootballLeagueRegion.Value));
+            return this.Ok(data.MapToCompetitionDto(bookmakerId, BwinConstantCollection.CurrentFootballLeague.Value));
         }
     }
 }

@@ -1,26 +1,26 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="BetanoGameDto.cs" company="HumbleBets">
+// <copyright file="GameDto.cs" company="HumbleBets">
 //     Copyright (c) HumbleBets. All rights reserved.
 // </copyright>
 // <summary>
-// BetanoGameDto
+// GameDto
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace BookmakerIntegration.Presentation.WebAPI.Dtos.Output.Betano
+namespace BookmakerIntegration.Presentation.WebAPI.Dtos.Output.Bookmaker
 {
     /// <summary>
-    /// <see cref="BetanoGameDto"/>
+    /// <see cref="GameDto"/>
     /// </summary>
-    public class BetanoGameDto
+    public class GameDto
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="BetanoGameDto"/> class.
+        /// Initializes a new instance of the <see cref="GameDto"/> class.
         /// </summary>
-        public BetanoGameDto()
+        public GameDto()
         {
             this.Game = string.Empty;
-            this.Odds = new List<BetanoOddDto>();
+            this.Odds = new List<OddDto>();
         }
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace BookmakerIntegration.Presentation.WebAPI.Dtos.Output.Betano
         /// Gets the odds.
         /// </summary>
         /// <value>The odds.</value>
-        public List<BetanoOddDto> Odds { get; init; }
+        public List<OddDto> Odds { get; init; }
 
         /// <summary>
         /// Gets the start date.

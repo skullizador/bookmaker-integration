@@ -10,10 +10,11 @@
 namespace BookmakerIntegration.Domain.Controller
 {
     using System.Net;
-    using AutoMapper;
+    using BookmakerIntegration.Domain.ConstantCollections.Betano;
     using BookmakerIntegration.Domain.DataModels.Betano;
     using BookmakerIntegration.Presentation.WebAPI.Dtos.Input.Bookmaker;
-    using BookmakerIntegration.Presentation.WebAPI.Dtos.Output.Betano;
+    using BookmakerIntegration.Presentation.WebAPI.Dtos.Output.Bookmaker;
+    using BookmakerIntegration.Presentation.WebAPI.Mappers.Betano;
     using BookmakerIntegration.Presentation.WebAPI.Queries.Betano.GetBetanoFootballDataQuery;
     using BookmakerIntegration.Presentation.WebAPI.Utils;
     using MediatR;
@@ -28,11 +29,6 @@ namespace BookmakerIntegration.Domain.Controller
     public class BetanoController : Controller
     {
         /// <summary>
-        /// The mapper
-        /// </summary>
-        private readonly IMapper mapper;
-
-        /// <summary>
         /// The mediator
         /// </summary>
         private readonly IMediator mediator;
@@ -43,10 +39,8 @@ namespace BookmakerIntegration.Domain.Controller
         /// <param name="mapper">The mapper.</param>
         /// <param name="mediator">The mediator.</param>
         public BetanoController(
-            IMapper mapper,
             IMediator mediator)
         {
-            this.mapper = mapper;
             this.mediator = mediator;
         }
 
@@ -57,7 +51,7 @@ namespace BookmakerIntegration.Domain.Controller
         /// <returns></returns>
         [HttpGet]
         [Route("Football/{CompetitionId}")]
-        [ProducesResponseType(typeof(BetanoBlockDto), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(CompetitionDto), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(ErrorMessage), (int)HttpStatusCode.NotFound)]
         [ProducesResponseType(typeof(ErrorMessage), (int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> GetFootballCompetitionDataAsync(
@@ -69,7 +63,26 @@ namespace BookmakerIntegration.Domain.Controller
                 CompetitionId = filter.CompetitionId
             }, cancellationToken);
 
-            return this.Ok(this.mapper.Map<List<BetanoBlockDto>>(blocks));
+            return this.Ok(ConvertToCompetitionDto(blocks));
+        }
+
+        /// <summary>
+        /// Converts to competition dto.
+        /// </summary>
+        /// <param name="blocks">The blocks.</param>
+        /// <returns></returns>
+        private static List<CompetitionDto> ConvertToCompetitionDto(List<BetanoBlocksDataModel> blocks)
+        {
+            List<CompetitionDto> competitions = new();
+
+            Guid bookmakerId = Guid.Parse(BetanoConstantCollection.BookmakerId.Value);
+
+            foreach (BetanoBlocksDataModel block in blocks)
+            {
+                competitions.Add(block.MapToCompetitionDto(bookmakerId));
+            }
+
+            return competitions;
         }
     }
 }

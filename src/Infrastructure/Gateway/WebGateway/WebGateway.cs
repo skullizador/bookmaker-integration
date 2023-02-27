@@ -12,6 +12,7 @@ namespace BookmakerIntegration.Infrastructure.Gateway.WebGateway
     using System.Threading;
     using System.Threading.Tasks;
     using BookmakerIntegration.Domain.ConstantCollections.Betclic;
+    using BookmakerIntegration.Domain.ConstantCollections.Bwin;
     using BookmakerIntegration.Domain.ConstantCollections.Placard;
     using RestSharp;
 
@@ -52,6 +53,27 @@ namespace BookmakerIntegration.Infrastructure.Gateway.WebGateway
 
             request.AddHeader(BetclicConstantCollection.RequestPostmanTokenHeader.Name, BetclicConstantCollection.RequestPostmanTokenHeader.Value);
             request.AddHeader(BetclicConstantCollection.RequestCacheControlHeader.Name, BetclicConstantCollection.RequestCacheControlHeader.Value);
+
+            RestResponse response = await client.ExecuteAsync(request, cancellationToken);
+
+            return response.Content;
+        }
+
+        /// <summary>
+        /// Gets the bwin data asynchronous.
+        /// </summary>
+        /// <param name="url">The URL.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns></returns>
+        public async Task<string> GetBwinDataAsync(string url, CancellationToken cancellationToken)
+        {
+            RestClient client = new(url);
+
+            RestRequest request = new(url, Method.Get);
+
+            request.AddHeader(BwinConstantCollection.XBwinBrowserUrlHeader.Name, BwinConstantCollection.XBwinBrowserUrlHeader.Value);
+            request.AddHeader(BwinConstantCollection.SportApiVersionHeader.Name, BwinConstantCollection.SportApiVersionHeader.Value);
+            request.AddHeader(BwinConstantCollection.CookieHeader.Name, BwinConstantCollection.CookieHeader.Value);
 
             RestResponse response = await client.ExecuteAsync(request, cancellationToken);
 

@@ -9,6 +9,8 @@
 
 namespace BookmakerIntegration.Domain.DataModels.Placard.Response
 {
+    using System;
+
     /// <summary>
     /// <see cref="PlacardEventModel"/>
     /// </summary>
@@ -288,7 +290,7 @@ namespace BookmakerIntegration.Domain.DataModels.Placard.Response
         /// Gets the start date time.
         /// </summary>
         /// <value>The start date time.</value>
-        public string StartDateTime { get; init; }
+        public DateTime StartDateTime { get; init; }
 
         /// <summary>
         /// Gets the tv channel.
