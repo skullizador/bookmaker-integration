@@ -36,10 +36,8 @@ namespace BookmakerIntegration.Presentation.WebAPI.Controller
         /// <summary>
         /// Initializes a new instance of the <see cref="BetclicController"/> class.
         /// </summary>
-        /// <param name="mapper">The mapper.</param>
         /// <param name="mediator">The mediator.</param>
-        public BetclicController(
-            IMediator mediator)
+        public BetclicController(IMediator mediator)
         {
             this.mediator = mediator;
         }

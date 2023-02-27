@@ -10,7 +10,6 @@
 namespace BookmakerIntegration.Presentation.WebAPI.Controller
 {
     using System.Net;
-    using AutoMapper;
     using BookmakerIntegration.Domain.ConstantCollections.Placard;
     using BookmakerIntegration.Domain.DataModels.Placard.Response;
     using BookmakerIntegration.Presentation.WebAPI.Dtos.Input.Bookmaker;
@@ -31,11 +30,6 @@ namespace BookmakerIntegration.Presentation.WebAPI.Controller
     public class PlacardController : Controller
     {
         /// <summary>
-        /// The mapper
-        /// </summary>
-        private readonly IMapper mapper;
-
-        /// <summary>
         /// The mediator
         /// </summary>
         private readonly IMediator mediator;
@@ -43,11 +37,9 @@ namespace BookmakerIntegration.Presentation.WebAPI.Controller
         /// <summary>
         /// Initializes a new instance of the <see cref="PlacardController"/> class.
         /// </summary>
-        /// <param name="mapper">The mapper.</param>
         /// <param name="mediator">The mediator.</param>
-        public PlacardController(IMapper mapper, IMediator mediator)
+        public PlacardController(IMediator mediator)
         {
-            this.mapper = mapper;
             this.mediator = mediator;
         }
 
@@ -79,8 +71,8 @@ namespace BookmakerIntegration.Presentation.WebAPI.Controller
 
             return this.Ok(data.Data.MapToCompetitionDto(
                 bookmakerId,
-               PlacardConstantCollection.CurrentFootballLeague.Value,
-               PlacardConstantCollection.CurrentFootballLeagueRegion.Value));
+                PlacardConstantCollection.CurrentFootballLeague.Value,
+                PlacardConstantCollection.CurrentFootballLeagueRegion.Value));
         }
     }
 }

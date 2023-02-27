@@ -10,7 +10,6 @@
 namespace BookmakerIntegration.Presentation.WebAPI.Controller
 {
     using System.Net;
-    using AutoMapper;
     using BookmakerIntegration.Domain.ConstantCollections.Bwin;
     using BookmakerIntegration.Domain.DataModels.Bwin;
     using BookmakerIntegration.Presentation.WebAPI.Dtos.Input.Bookmaker;
@@ -30,11 +29,6 @@ namespace BookmakerIntegration.Presentation.WebAPI.Controller
     public class BwinController : Controller
     {
         /// <summary>
-        /// The mapper
-        /// </summary>
-        private readonly IMapper mapper;
-
-        /// <summary>
         /// The mediator
         /// </summary>
         private readonly IMediator mediator;
@@ -42,13 +36,9 @@ namespace BookmakerIntegration.Presentation.WebAPI.Controller
         /// <summary>
         /// Initializes a new instance of the <see cref="BwinController"/> class.
         /// </summary>
-        /// <param name="mapper">The mapper.</param>
         /// <param name="mediator">The mediator.</param>
-        public BwinController(
-            IMapper mapper,
-            IMediator mediator)
+        public BwinController(IMediator mediator)
         {
-            this.mapper = mapper;
             this.mediator = mediator;
         }
 
