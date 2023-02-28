@@ -19,7 +19,7 @@
 ## Features
 
 Every bookmaker has the following features available:
-* Get Football competition data :heavy_check_mark:;
+* Get Football competition data :heavy_check_mark:
 
 ## Roadmap
 
