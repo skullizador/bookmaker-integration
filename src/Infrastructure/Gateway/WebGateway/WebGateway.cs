@@ -81,6 +81,23 @@ namespace BookmakerIntegration.Infrastructure.Gateway.WebGateway
         }
 
         /// <summary>
+        /// Gets the casino portugal data asynchronous.
+        /// </summary>
+        /// <param name="url">The URL.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns></returns>
+        public async Task<string> GetCasinoPortugalDataAsync(string url, CancellationToken cancellationToken)
+        {
+            RestClient client = new(url);
+
+            RestRequest request = new(url, Method.Get);
+
+            RestResponse response = await client.ExecuteAsync(request, cancellationToken);
+
+            return response.Content;
+        }
+
+        /// <summary>
         /// Gets the placard data asynchronous.
         /// </summary>
         /// <param name="url">The URL.</param>

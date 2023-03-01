@@ -14,6 +14,7 @@ namespace BookmakerIntegration.Presentation.WebAPI.Services.DataCollector
     using BookmakerIntegration.Domain.DataModels.Betano;
     using BookmakerIntegration.Domain.DataModels.Betclic;
     using BookmakerIntegration.Domain.DataModels.Bwin;
+    using BookmakerIntegration.Domain.DataModels.CasinoPortugal;
     using BookmakerIntegration.Domain.DataModels.Placard.Request;
     using BookmakerIntegration.Domain.DataModels.Placard.Response;
     using BookmakerIntegration.Infrastructure.Gateway.WebGateway;
@@ -91,6 +92,23 @@ namespace BookmakerIntegration.Presentation.WebAPI.Services.DataCollector
             page.LoadHtml(data);
 
             return JsonConvert.DeserializeObject<BwinJsonDataModel>(page.DocumentNode.InnerHtml);
+        }
+
+        /// <summary>
+        /// Collects the casino portugal data asynchronous.
+        /// </summary>
+        /// <param name="url">The URL.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns></returns>
+        public async Task<CasinoPortugalJsonDataModel> CollectCasinoPortugalDataAsync(string url, CancellationToken cancellationToken)
+        {
+            string data = await this.webGateway.GetCasinoPortugalDataAsync(url, cancellationToken);
+
+            HtmlDocument page = new();
+
+            page.LoadHtml(data);
+
+            return JsonConvert.DeserializeObject<CasinoPortugalJsonDataModel>(page.DocumentNode.InnerHtml);
         }
 
         /// <summary>
