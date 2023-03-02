@@ -1,9 +1,9 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="BetclicController.cs" company="HumbleBets">
+// <copyright file="CasinoPortugalController.cs" company="HumbleBets">
 //     Copyright (c) HumbleBets. All rights reserved.
 // </copyright>
 // <summary>
-// BetclicController
+// CasinoPortugalController
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -16,7 +16,7 @@ namespace BookmakerIntegration.Presentation.WebAPI.Controller
     using BookmakerIntegration.Presentation.WebAPI.Dtos.Input.Bookmaker;
     using BookmakerIntegration.Presentation.WebAPI.Dtos.Output.Bookmaker;
     using BookmakerIntegration.Presentation.WebAPI.Mappers.CasinoPortugal;
-    using BookmakerIntegration.Presentation.WebAPI.Queries.CasinoPortugal.GetCasinoPortugalDataQuery;
+    using BookmakerIntegration.Presentation.WebAPI.Queries.CasinoPortugal.GetCasinoPortugalFootballDataQuery;
     using BookmakerIntegration.Presentation.WebAPI.Utils;
     using MediatR;
     using Microsoft.AspNetCore.Mvc;
@@ -65,10 +65,9 @@ namespace BookmakerIntegration.Presentation.WebAPI.Controller
         [ProducesResponseType(typeof(ErrorMessage), (int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> GetFootballCompetitionDataAsync(
             [FromRoute] GetBookmakerDataByCompetitionIdDto filter,
-            CancellationToken cancellationToken
-            )
+            CancellationToken cancellationToken)
         {
-            CasinoPortugalJsonDataModel competition = await this.mediator.Send(new GetCasinoPortugalDataQuery
+            CasinoPortugalJsonDataModel competition = await this.mediator.Send(new GetCasinoPortugalFootballDataQuery
             {
                 CompetitionId = filter.CompetitionId
             }, cancellationToken);

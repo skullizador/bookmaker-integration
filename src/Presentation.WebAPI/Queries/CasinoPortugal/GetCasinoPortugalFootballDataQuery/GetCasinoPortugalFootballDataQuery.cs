@@ -1,22 +1,22 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="GetCasinoPortugalDataQuery.cs" company="HumbleBets">
+// <copyright file="GetCasinoPortugalFootballDataQuery.cs" company="HumbleBets">
 //     Copyright (c) HumbleBets. All rights reserved.
 // </copyright>
 // <summary>
-// GetCasinoPortugalDataQuery
+// GetCasinoPortugalFootballDataQuery
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace BookmakerIntegration.Presentation.WebAPI.Queries.CasinoPortugal.GetCasinoPortugalDataQuery
+namespace BookmakerIntegration.Presentation.WebAPI.Queries.CasinoPortugal.GetCasinoPortugalFootballDataQuery
 {
     using BookmakerIntegration.Domain.DataModels.CasinoPortugal;
     using MediatR;
 
     /// <summary>
-    /// <see cref="GetCasinoPortugalDataQuery"/>
+    /// <see cref="GetCasinoPortugalFootballDataQuery"/>
     /// </summary>
     /// <seealso cref="IRequest{CasinoPortugalJsonDataModel}"/>
-    public class GetCasinoPortugalDataQuery : IRequest<CasinoPortugalJsonDataModel>
+    public class GetCasinoPortugalFootballDataQuery : IRequest<CasinoPortugalJsonDataModel>
     {
         /// <summary>
         /// Gets or sets the competition identifier.

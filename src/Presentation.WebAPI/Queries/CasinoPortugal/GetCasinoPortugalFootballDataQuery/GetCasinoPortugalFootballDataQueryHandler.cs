@@ -1,13 +1,13 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="GetCasinoPortugalDataQueryHandler.cs" company="HumbleBets">
+// <copyright file="GetCasinoPortugalFootballDataQueryHandler.cs" company="HumbleBets">
 //     Copyright (c) HumbleBets. All rights reserved.
 // </copyright>
 // <summary>
-// GetCasinoPortugalDataQueryHandler
+// GetCasinoPortugalFootballDataQueryHandler
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace BookmakerIntegration.Presentation.WebAPI.Queries.CasinoPortugal.GetCasinoPortugalDataQuery
+namespace BookmakerIntegration.Presentation.WebAPI.Queries.CasinoPortugal.GetCasinoPortugalFootballDataQuery
 {
     using System.Threading;
     using System.Threading.Tasks;
@@ -17,10 +17,10 @@ namespace BookmakerIntegration.Presentation.WebAPI.Queries.CasinoPortugal.GetCas
     using MediatR;
 
     /// <summary>
-    /// <see cref="GetCasinoPortugalDataQueryHandler"/>
+    /// <see cref="GetCasinoPortugalFootballDataQueryHandler"/>
     /// </summary>
     /// <seealso cref="IRequestHandler{HandlerGetCasinoPortugalDataQuery,CasinoPortugalJsonDataModel}"/>
-    public class GetCasinoPortugalDataQueryHandler : IRequestHandler<GetCasinoPortugalDataQuery, CasinoPortugalJsonDataModel>
+    public class GetCasinoPortugalFootballDataQueryHandler : IRequestHandler<GetCasinoPortugalFootballDataQuery, CasinoPortugalJsonDataModel>
     {
         /// <summary>
         /// The competition repository
@@ -33,11 +33,12 @@ namespace BookmakerIntegration.Presentation.WebAPI.Queries.CasinoPortugal.GetCas
         private readonly IDataCollector dataCollector;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GetCasinoPortugalDataQueryHandler"/> class.
+        /// Initializes a new instance of the <see
+        /// cref="GetCasinoPortugalFootballDataQueryHandler"/> class.
         /// </summary>
         /// <param name="competitionRepository">The competition repository.</param>
         /// <param name="dataCollector">The data collector.</param>
-        public GetCasinoPortugalDataQueryHandler(
+        public GetCasinoPortugalFootballDataQueryHandler(
             ICompetitionRepository competitionRepository,
             IDataCollector dataCollector)
         {
@@ -51,9 +52,11 @@ namespace BookmakerIntegration.Presentation.WebAPI.Queries.CasinoPortugal.GetCas
         /// <param name="request">The request</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Response from the request</returns>
-        public async Task<CasinoPortugalJsonDataModel> Handle(GetCasinoPortugalDataQuery request, CancellationToken cancellationToken)
+        public async Task<CasinoPortugalJsonDataModel> Handle(GetCasinoPortugalFootballDataQuery request, CancellationToken cancellationToken)
         {
-            CasinoPortugalJsonDataModel json = await this.dataCollector.CollectCasinoPortugalDataAsync("https://odds.casinoportugal.pt/redis/fixtures?take=80&type=pre&countMarkets=true&lang=pt&competitionId=107", cancellationToken);
+            CasinoPortugalJsonDataModel json = await this.dataCollector.CollectCasinoPortugalDataAsync(
+                "https://odds.casinoportugal.pt/redis/fixtures?take=80&type=pre&countMarkets=true&lang=pt&competitionId=107",
+                cancellationToken);
 
             return json;
         }
