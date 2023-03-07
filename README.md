@@ -50,16 +50,15 @@ The application can be run locally or in a docker container, the requirements fo
 
 ## Quick Start 
 ### Run Docker
-TODO: Implement dockerfiles to run the application in a docker container.
 
 First build the image:
 ```bash
-$ docker-compose build
+$ docker build . -t bookmaker-integration:{version}
 ```
 
 When ready, run it:
 ```bash
-$ docker-compose up
+$ docker run -p {port:port} bookmaker-integration:{version}
 ```
 
-Application will run by default on port `1234`
+Application will run by default on port `5000`
