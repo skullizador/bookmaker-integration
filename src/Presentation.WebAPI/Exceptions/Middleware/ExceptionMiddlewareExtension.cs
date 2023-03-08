@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace GameCollector.Presentation.WebAPI.Exceptions.Middleware
+namespace BookmakerIntegration.Presentation.WebAPI.Exceptions.Middleware
 {
     using BookmakerIntegration.Presentation.WebAPI.Exceptions.Middleware;
 
